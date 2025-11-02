@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { CreditCard, Eye, MoreHorizontal, Send } from 'lucide-react';
+import Link from 'next/link';
 
 const colorMap = {
   orange: {
@@ -52,13 +53,23 @@ export default function AccountCard({ account, index }) {
             <p className="text-[13px]">{account.accountNumber}</p>
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className={`p-2 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
+          <Link
+            href={`/accounts/${account.accountNumber}`}
+            className="inline-block"
           >
-            <Eye className="w-4 h-4" />
-          </motion.button>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex flex-col items-center gap-1"
+            >
+              <button
+                className={`p-2 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
+              >
+                <Eye className="w-4 h-4" />
+              </button>
+              <span className="text-[10px] font-medium opacity-90">Action</span>
+            </motion.div>
+          </Link>
         </div>
 
         <div className="mb-6 sm:mb-4 lg:mb-4 xxl:mb-6">
@@ -76,30 +87,45 @@ export default function AccountCard({ account, index }) {
           <p className="text-xs opacity-75">{account.currency}</p>
         </div>
 
-        <div className="flex items-center gap-2">
-          <motion.button
+        <div className="flex items-center gap-3">
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className={`p-2.5 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
+            className="flex flex-col items-center gap-1"
           >
-            <Send className="w-4 h-4" />
-          </motion.button>
+            <button
+              className={`p-2.5 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
+            >
+              <Send className="w-4 h-4" />
+            </button>
+            <span className="text-[10px] font-medium opacity-90">Send</span>
+          </motion.div>
 
-          <motion.button
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className={`p-2.5 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
+            className="flex flex-col items-center gap-1"
           >
-            <CreditCard className="w-4 h-4" />
-          </motion.button>
+            <button
+              className={`p-2.5 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
+            >
+              <CreditCard className="w-4 h-4" />
+            </button>
+            <span className="text-[10px] font-medium opacity-90">Card</span>
+          </motion.div>
 
-          <motion.button
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className={`p-2.5 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors ml-auto`}
+            className="flex flex-col items-center gap-1 ml-auto"
           >
-            <MoreHorizontal className="w-4 h-4" />
-          </motion.button>
+            <button
+              className={`p-2.5 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
+            >
+              <MoreHorizontal className="w-4 h-4" />
+            </button>
+            <span className="text-[10px] font-medium opacity-90">More</span>
+          </motion.div>
         </div>
       </div>
     </motion.div>
