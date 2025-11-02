@@ -372,7 +372,7 @@ export default function RecentTransactions() {
 
       {/* Desktop Table - Simple & Clean */}
       <div className="hidden md:block bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto overflow-y-hidden">
           <table className="w-full">
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
