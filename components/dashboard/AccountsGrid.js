@@ -99,7 +99,7 @@ export default function AccountsGrid() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.3 }}
             >
-              <AccountCard account={account} index={index} />
+              <AccountCard account={account} index={index} viewMode="grid" />
             </motion.div>
           ))}
         </div>
@@ -107,7 +107,7 @@ export default function AccountsGrid() {
 
       {/* List View */}
       {viewMode === 'list' && (
-        <div className="hidden sm:flex sm:flex-col md:hidden lg:flex gap-3">
+        <div className="hidden sm:grid grid-cols-1 sm:flex-col md:hidden lg:grid lg:grid-cols-2 gap-4">
           {accounts.map((account, index) => (
             <motion.div
               key={account.id}
@@ -115,7 +115,7 @@ export default function AccountsGrid() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1, duration: 0.3 }}
             >
-              <AccountCard account={account} index={index} />
+              <AccountCard account={account} index={index} viewMode="list" />
             </motion.div>
           ))}
         </div>
@@ -136,6 +136,7 @@ export default function AccountsGrid() {
                   <AccountCard
                     account={accounts[currentIndex + 2]}
                     index={currentIndex + 2}
+                    viewMode="grid"
                   />
                 </div>
               </motion.div>
@@ -152,6 +153,7 @@ export default function AccountsGrid() {
                   <AccountCard
                     account={accounts[currentIndex + 1]}
                     index={currentIndex + 1}
+                    viewMode="grid"
                   />
                 </div>
               </motion.div>
@@ -178,6 +180,7 @@ export default function AccountsGrid() {
               <AccountCard
                 account={accounts[currentIndex]}
                 index={currentIndex}
+                viewMode="grid"
               />
             </motion.div>
           </motion.div>
