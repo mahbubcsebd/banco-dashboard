@@ -43,7 +43,6 @@ export default function Dashboard() {
           <div className="mb-6 md:mb-8">
             <QuickActions />
           </div>
-
           {/* Accounts Section */}
           <div className="mb-6 md:mb-8">
             <AccountsGrid />
