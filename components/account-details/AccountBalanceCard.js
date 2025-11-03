@@ -19,6 +19,52 @@ const AccountBalanceCard = ({ account }) => {
 
   if (!account) return null;
 
+  // Color mapping based on account color - matches AccountCard exactly
+  const colorMap = {
+    orange: {
+      gradient: 'bg-gradient-to-br from-orange-400 to-orange-500',
+      light: 'bg-orange-50',
+      lightBorder: 'border-orange-100',
+      text: 'text-orange-700',
+      textDark: 'text-orange-900',
+      lightText: 'text-orange-100',
+      iconColor: 'text-orange-600',
+      iconBg: 'bg-orange-50',
+    },
+    purple: {
+      gradient: 'bg-gradient-to-br from-purple-400 to-purple-500',
+      light: 'bg-purple-50',
+      lightBorder: 'border-purple-100',
+      text: 'text-purple-700',
+      textDark: 'text-purple-900',
+      lightText: 'text-purple-100',
+      iconColor: 'text-purple-600',
+      iconBg: 'bg-purple-50',
+    },
+    teal: {
+      gradient: 'bg-gradient-to-br from-teal-400 to-teal-500',
+      light: 'bg-teal-50',
+      lightBorder: 'border-teal-100',
+      text: 'text-teal-700',
+      textDark: 'text-teal-900',
+      lightText: 'text-teal-100',
+      iconColor: 'text-teal-600',
+      iconBg: 'bg-teal-50',
+    },
+    blue: {
+      gradient: 'bg-gradient-to-br from-blue-400 to-blue-500',
+      light: 'bg-blue-50',
+      lightBorder: 'border-blue-100',
+      text: 'text-blue-700',
+      textDark: 'text-blue-900',
+      lightText: 'text-blue-100',
+      iconColor: 'text-blue-600',
+      iconBg: 'bg-blue-50',
+    },
+  };
+
+  const colors = colorMap[account.color] || colorMap.orange;
+
   // Check if balances are different
   const showAvailableBalance = account.balance !== account.availableBalance;
 
@@ -27,10 +73,10 @@ const AccountBalanceCard = ({ account }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="bg-white rounded-2xl shadow-md overflow-hidden border border-orange-100 mb-6"
+      className={`bg-white rounded-2xl shadow-md overflow-hidden border ${colors.lightBorder} mb-6`}
     >
-      {/* Main Balance Section - Orange Gradient */}
-      <div className="relative bg-gradient-to-br from-orange-400 to-orange-500 p-6 sm:p-7 text-white">
+      {/* Main Balance Section - Dynamic Gradient (matches AccountCard) */}
+      <div className={`relative ${colors.gradient} p-6 sm:p-7 text-white`}>
         {/* Decorative circles */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-12 -right-12 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
@@ -45,10 +91,12 @@ const AccountBalanceCard = ({ account }) => {
                 <Shield className="w-5 h-5 text-white" strokeWidth={2.5} />
               </div>
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-orange-100">
+                <p
+                  className={`text-sm font-bold uppercase tracking-wider ${colors.lightText}`}
+                >
                   {account.type} Account
                 </p>
-                <p className="text-[10px] text-white/80 font-mono">
+                <p className="text-[13px] text-white font-mono">
                   {account.accountNumber}
                 </p>
               </div>
@@ -118,13 +166,17 @@ const AccountBalanceCard = ({ account }) => {
 
       {/* Available Balance - Only if different */}
       {showAvailableBalance && (
-        <div className="bg-orange-50 px-6 sm:px-7 py-4 border-b border-orange-100">
+        <div
+          className={`${colors.light} px-6 sm:px-7 py-4 border-b ${colors.lightBorder}`}
+        >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-orange-700 font-semibold uppercase tracking-wider mb-1">
+              <p
+                className={`text-xs ${colors.text} font-semibold uppercase tracking-wider mb-1`}
+              >
                 Available Balance
               </p>
-              <p className="text-2xl font-bold text-orange-900">
+              <p className={`text-2xl font-bold ${colors.textDark}`}>
                 {showBalance
                   ? `${
                       account.currency
@@ -173,9 +225,9 @@ const AccountBalanceCard = ({ account }) => {
             month: 'short',
             year: 'numeric',
           })}
-          iconColor="text-orange-600"
-          iconBg="bg-orange-50"
-          borderColor="border-orange-100"
+          iconColor={colors.iconColor}
+          iconBg={colors.iconBg}
+          borderColor={colors.lightBorder}
         />
         <StatItem
           icon={DollarSign}

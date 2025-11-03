@@ -204,7 +204,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
       {/* Main Content - Compact Layout */}
       <div className="flex items-center justify-between h-full px-5 relative z-10">
         {/* Left Section - Icon & Type */}
-        <div className="flex items-center gap-4 flex-shrink-0">
+        <div className="flex items-center gap-4 shrink-0">
           <motion.div
             whileHover={{
               scale: 1.05,
@@ -266,7 +266,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
               className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-200 group relative overflow-hidden"
             >
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${colors.circleBg} opacity-0 group-hover:opacity-15 transition-opacity duration-300`}
+                className={`absolute inset-0 bg-linear-to-br ${colors.circleBg} opacity-0 group-hover:opacity-15 transition-opacity duration-300`}
               />
               <Eye
                 className="w-4 h-4 text-gray-700 group-hover:text-gray-900 transition-colors duration-200 relative z-10"
