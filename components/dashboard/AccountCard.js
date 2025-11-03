@@ -182,15 +182,15 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
         // boxShadow: '0 12px 40px rgba(0,0,0,0.12)',
         transition: { duration: 0.3, ease: 'easeOut' },
       }}
-      className="relative w-[calc(100%-100px)] mb-8"
+      className="relative w-full lg:w-[calc(100%-100px)] lg:mb-6"
     >
-      <div className="relative bg-white h-[180px] overflow-visible pr-[150px] w-[calc(100%-100px)]">
+      <div className="relative bg-white h-[180px] overflow-visible w-full lg:w-[calc(100%-100px)]">
         {/* Left colored accent bar */}
         <div
           className={`absolute left-0 top-0 bottom-0 w-2 ${colors.linear} rounded-l-2xl`}
         />
-        <div className="absolute left-full top-0 h-1/2 bg-white w-[100px] rounded-tr-full z-20" />
-        <div className="absolute left-full bottom-0 h-1/2 bg-white w-[100px] rounded-br-full z-80" />
+        <div className="absolute left-full top-0 h-1/2 bg-white w-[100px] rounded-tr-full z-20 hidden lg:block" />
+        <div className="absolute left-full bottom-0 h-1/2 bg-white w-[100px] rounded-br-full z-80 hidden lg:block" />
 
         {/* Content Section with Icon & Divider */}
         <div className="absolute left-6 top-1/2 -translate-y-1/2 flex items-center gap-5 z-50 max-w-[55%]">
@@ -204,7 +204,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
             className="relative shrink-0"
           >
             <div
-              className={`w-20 h-20 rounded-xl ${colors.linear} flex items-center justify-center text-white relative overflow-hidden`}
+              className={`w-16 h-16 md:w-20 md:h-20 rounded-xl ${colors.linear} flex items-center justify-center text-white relative overflow-hidden`}
             >
               <div className="absolute inset-0 bg-white opacity-10" />
               <IconComponent
@@ -305,9 +305,9 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
         </motion.div>
 
         {/* Right side circular design */}
-        <div className="absolute left-full top-0 h-1/2 bg-white w-[100px] rounded-tr-full z-20" />
-        <div className="absolute left-full bottom-0 h-1/2 bg-white w-[100px] rounded-br-full z-20" />
-        <div className="absolute left-full top-1/2 -translate-y-1/2 w-[180px] h-[180px] z-30">
+        <div className="absolute left-full top-0 h-1/2 bg-white w-[100px] rounded-tr-full z-20 hidden lg:block" />
+        <div className="absolute left-full bottom-0 h-1/2 bg-white w-[100px] rounded-br-full z-20 hidden lg:block" />
+        <div className="absolute left-full top-1/2 -translate-y-1/2 w-[180px] h-[180px] z-30 hidden lg:block">
           {/* Center circle with linear and 3D effect */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -317,7 +317,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
               duration: 0.5,
               ease: 'easeOut',
             }}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 w-[180px] h-[180px] rounded-full ${colors.linear} z-40 l`}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 w-[180px] h-[180px] rounded-full ${colors.linear} z-40 hidden lg:block`}
           >
             {/* Inner highlight for 3D effect */}
             <div className="absolute inset-0 rounded-full bg-linear-to-br from-white/30 via-transparent to-black/20" />

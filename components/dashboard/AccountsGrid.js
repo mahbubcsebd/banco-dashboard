@@ -50,8 +50,8 @@ export default function AccountsGrid() {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* View Toggle Buttons */}
-          <div className="hidden sm:flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+          {/* View Toggle Buttons - Now visible on all screen sizes */}
+          <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setViewMode('grid')}
@@ -89,9 +89,9 @@ export default function AccountsGrid() {
         </div>
       </div>
 
-      {/* Grid View */}
+      {/* Grid View - Desktop */}
       {viewMode === 'grid' && (
-        <div className="hidden sm:grid sm:grid-cols-2 md:hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
           {accounts.map((account, index) => (
             <motion.div
               key={account.id}
@@ -105,9 +105,9 @@ export default function AccountsGrid() {
         </div>
       )}
 
-      {/* List View */}
+      {/* List View - Desktop */}
       {viewMode === 'list' && (
-        <div className="hidden sm:grid grid-cols-1 sm:flex-col md:hidden lg:grid lg:grid-cols-2 gap-4">
+        <div className="hidden sm:grid grid-cols-1 xl:grid-cols-2 gap-4">
           {accounts.map((account, index) => (
             <motion.div
               key={account.id}
@@ -121,114 +121,132 @@ export default function AccountsGrid() {
         </div>
       )}
 
-      {/* Mobile Carousel View */}
-      <div className="sm:hidden md:block lg:hidden">
-        <div className="relative h-[210px] perspective-1000">
-          <div className="absolute inset-0 pointer-events-none">
-            {currentIndex + 2 < accounts.length && (
-              <motion.div
-                initial={{ scale: 0.86, y: 16, opacity: 0.3 }}
-                animate={{ scale: 0.86, y: 16, opacity: 0.3 }}
-                className="absolute inset-0 px-2"
-                style={{ filter: 'brightness(0.7)' }}
-              >
-                <div className="h-full rounded-2xl overflow-hidden shadow-xl">
-                  <AccountCard
-                    account={accounts[currentIndex + 2]}
-                    index={currentIndex + 2}
-                    viewMode="grid"
-                  />
-                </div>
-              </motion.div>
-            )}
+      {/* Mobile View - Grid or List based on toggle */}
+      {viewMode === 'grid' && (
+        <div className="sm:hidden">
+          <div className="relative h-[210px] perspective-1000">
+            <div className="absolute inset-0 pointer-events-none">
+              {currentIndex + 2 < accounts.length && (
+                <motion.div
+                  initial={{ scale: 0.86, y: 16, opacity: 0.3 }}
+                  animate={{ scale: 0.86, y: 16, opacity: 0.3 }}
+                  className="absolute inset-0 px-2"
+                  style={{ filter: 'brightness(0.7)' }}
+                >
+                  <div className="h-full rounded-2xl overflow-hidden shadow-xl">
+                    <AccountCard
+                      account={accounts[currentIndex + 2]}
+                      index={currentIndex + 2}
+                      viewMode="grid"
+                    />
+                  </div>
+                </motion.div>
+              )}
 
-            {currentIndex + 1 < accounts.length && (
+              {currentIndex + 1 < accounts.length && (
+                <motion.div
+                  initial={{ scale: 0.93, y: 8, opacity: 0.6 }}
+                  animate={{ scale: 0.93, y: 8, opacity: 0.6 }}
+                  className="absolute inset-0 px-2"
+                  style={{ filter: 'brightness(0.85)' }}
+                >
+                  <div className="h-full rounded-2xl overflow-hidden shadow-xl">
+                    <AccountCard
+                      account={accounts[currentIndex + 1]}
+                      index={currentIndex + 1}
+                      viewMode="grid"
+                    />
+                  </div>
+                </motion.div>
+              )}
+            </div>
+
+            <motion.div
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.1}
+              onDragEnd={handleDragEnd}
+              style={{
+                x,
+                rotateY,
+                scale,
+                transformStyle: 'preserve-3d',
+              }}
+              className="absolute inset-0 cursor-grab active:cursor-grabbing"
+            >
               <motion.div
-                initial={{ scale: 0.93, y: 8, opacity: 0.6 }}
-                animate={{ scale: 0.93, y: 8, opacity: 0.6 }}
-                className="absolute inset-0 px-2"
-                style={{ filter: 'brightness(0.85)' }}
+                className="h-full rounded-2xl overflow-hidden shadow-2xl"
+                whileTap={{ scale: 0.98 }}
               >
-                <div className="h-full rounded-2xl overflow-hidden shadow-xl">
-                  <AccountCard
-                    account={accounts[currentIndex + 1]}
-                    index={currentIndex + 1}
-                    viewMode="grid"
-                  />
-                </div>
+                <AccountCard
+                  account={accounts[currentIndex]}
+                  index={currentIndex}
+                  viewMode="grid"
+                />
               </motion.div>
-            )}
+            </motion.div>
+
+            <button
+              onClick={() => {
+                setDirection(-1);
+                setCurrentIndex(
+                  currentIndex > 0 ? currentIndex - 1 : accounts.length - 1
+                );
+              }}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center z-10 opacity-0 hover:opacity-100 transition-opacity"
+            >
+              <ChevronRight className="w-4 h-4 rotate-180 text-gray-700" />
+            </button>
+
+            <button
+              onClick={() => {
+                setDirection(1);
+                setCurrentIndex(
+                  currentIndex < accounts.length - 1 ? currentIndex + 1 : 0
+                );
+              }}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center z-10 opacity-0 hover:opacity-100 transition-opacity"
+            >
+              <ChevronRight className="w-4 h-4 text-gray-700" />
+            </button>
           </div>
 
-          <motion.div
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.1}
-            onDragEnd={handleDragEnd}
-            style={{
-              x,
-              rotateY,
-              scale,
-              transformStyle: 'preserve-3d',
-            }}
-            className="absolute inset-0 cursor-grab active:cursor-grabbing"
-          >
-            <motion.div
-              className="h-full rounded-2xl overflow-hidden shadow-2xl"
-              whileTap={{ scale: 0.98 }}
-            >
-              <AccountCard
-                account={accounts[currentIndex]}
-                index={currentIndex}
-                viewMode="grid"
+          <div className="flex justify-center items-center gap-1.5 mt-6">
+            {accounts.map((_, index) => (
+              <motion.button
+                key={index}
+                onClick={() => {
+                  setDirection(index > currentIndex ? 1 : -1);
+                  setCurrentIndex(index);
+                }}
+                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.1 }}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  index === currentIndex
+                    ? 'w-6 bg-gradient-to-r from-orange-500 to-orange-600 shadow-sm'
+                    : 'w-1.5 bg-gray-300 hover:bg-gray-400'
+                }`}
               />
-            </motion.div>
-          </motion.div>
-
-          <button
-            onClick={() => {
-              setDirection(-1);
-              setCurrentIndex(
-                currentIndex > 0 ? currentIndex - 1 : accounts.length - 1
-              );
-            }}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center z-10 opacity-0 hover:opacity-100 transition-opacity"
-          >
-            <ChevronRight className="w-4 h-4 rotate-180 text-gray-700" />
-          </button>
-
-          <button
-            onClick={() => {
-              setDirection(1);
-              setCurrentIndex(
-                currentIndex < accounts.length - 1 ? currentIndex + 1 : 0
-              );
-            }}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center z-10 opacity-0 hover:opacity-100 transition-opacity"
-          >
-            <ChevronRight className="w-4 h-4 text-gray-700" />
-          </button>
+            ))}
+          </div>
         </div>
+      )}
 
-        <div className="flex justify-center items-center gap-1.5 mt-6">
-          {accounts.map((_, index) => (
-            <motion.button
-              key={index}
-              onClick={() => {
-                setDirection(index > currentIndex ? 1 : -1);
-                setCurrentIndex(index);
-              }}
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.1 }}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                index === currentIndex
-                  ? 'w-6 bg-linear-to-r from-orange-500 to-orange-600 shadow-sm'
-                  : 'w-1.5 bg-gray-300 hover:bg-gray-400'
-              }`}
-            />
+      {/* Mobile View - List View */}
+      {viewMode === 'list' && (
+        <div className="sm:hidden space-y-4">
+          {accounts.map((account, index) => (
+            <motion.div
+              key={account.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.3 }}
+            >
+              <AccountCard account={account} index={index} viewMode="list" />
+            </motion.div>
           ))}
         </div>
-      </div>
+      )}
 
       <style jsx>{`
         .perspective-1000 {

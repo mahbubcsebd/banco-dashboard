@@ -50,7 +50,7 @@ export default function Header({
   const unreadCount = notifications.filter((n) => n.unread).length;
 
   return (
-    <header className="bg-white border-b border-gray-200 h-16 px-4 md:px-6 flex items-center justify-between sticky top-0 z-30">
+    <header className="bg-white border-b border-gray-200 h-16 px-4 md:px-6 flex items-center justify-between sticky top-0 z-90">
       {/* Mobile Menu Button */}
       <button
         onClick={onMobileMenuClick}
