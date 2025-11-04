@@ -223,7 +223,7 @@ export default function AccountsGrid() {
                 whileHover={{ scale: 1.1 }}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   index === currentIndex
-                    ? 'w-6 bg-gradient-to-r from-orange-500 to-orange-600 shadow-sm'
+                    ? 'w-6 bg-linear-to-r from-orange-500 to-orange-600 shadow-sm'
                     : 'w-1.5 bg-gray-300 hover:bg-gray-400'
                 }`}
               />

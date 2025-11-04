@@ -182,15 +182,15 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
         // boxShadow: '0 12px 40px rgba(0,0,0,0.12)',
         transition: { duration: 0.3, ease: 'easeOut' },
       }}
-      className="relative w-full lg:w-[calc(100%-100px)] lg:mb-6"
+      className="relative w-full lg:w-[calc(100%-100px)]"
     >
-      <div className="relative bg-white h-[120px] lg:h-[180px] overflow-visible w-full lg:w-[calc(100%-100px)]">
+      <div className="relative bg-white h-[120px] overflow-visible w-full lg:w-[calc(100%-100px)]">
         {/* Left colored accent bar */}
         <div
-          className={`absolute left-0 top-0 bottom-0 w-1 lg:w-2 ${colors.linear} rounded-l-2xl`}
+          className={`absolute left-0 top-0 bottom-0 w-1 ${colors.linear} rounded-l-2xl`}
         />
-        <div className="absolute left-full top-0 h-1/2 bg-white w-[100px] rounded-tr-full z-20 hidden lg:block" />
-        <div className="absolute left-full bottom-0 h-1/2 bg-white w-[100px] rounded-br-full z-80 hidden lg:block" />
+        <div className="absolute left-full top-0 h-1/2 bg-white w-[70px] rounded-tr-full z-20 hidden lg:block" />
+        <div className="absolute left-full bottom-0 h-1/2 bg-white w-[70px] rounded-br-full z-80 hidden lg:block" />
 
         {/* Content Section with Icon & Divider */}
         <div className="absolute left-6 top-1/2 -translate-y-1/2 flex items-center gap-5 z-50 max-w-[55%]">
@@ -216,9 +216,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
 
           {/* Divider Line */}
           <div className="w-px h-24 bg-linear-to-b from-transparent via-gray-300 to-transparent shrink-0" />
-
-          {/* Text Content */}
-          <div className="flex xl:flex-col items-center xl:items-start gap-4">
+          <div className="flex items-center gap-4">
             <div className="flex flex-col items-center gap-1">
               <p className="text-xs font-bold text-gray-800 uppercase tracking-wide">
                 {account.type}
@@ -257,6 +255,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
               </p>
             </motion.div>
           </div>
+          {/* Text Content */}
         </div>
 
         {/* Action Buttons - Positioned on Circle Area */}
@@ -264,7 +263,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: index * 0.05 + 0.3, duration: 0.4 }}
-          className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 flex flex-col gap-1.5 lg:gap-2 z-50"
+          className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 flex flex-col gap-1.5 z-50"
         >
           <motion.button
             onClick={handleViewAccount}
@@ -274,9 +273,9 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
               transition: { duration: 0.2, ease: 'easeOut' },
             }}
             whileTap={{ scale: 0.95 }}
-            className={`p-2 lg:p-2.5 rounded-sm flex items-center justify-center w-7 h-7 lg:w-auto lg:h-auto ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-md hover:shadow-lg backdrop-blur-sm`}
+            className={`p-2 rounded-sm flex items-center justify-center w-7 h-7 ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-md hover:shadow-lg backdrop-blur-sm`}
           >
-            <Eye className="w-4 h-4 text-gray-700" strokeWidth={2.5} />
+            <Eye className="w-4 h-4 text-gray-700" strokeWidth={2} />
           </motion.button>
 
           <motion.button
@@ -286,9 +285,9 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
               transition: { duration: 0.2, ease: 'easeOut' },
             }}
             whileTap={{ scale: 0.95 }}
-            className={`p-1 lg:p-2.5 rounded-sm flex items-center justify-center w-7 h-7 lg:w-auto lg:h-auto ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-md hover:shadow-lg backdrop-blur-sm`}
+            className={`p-1 rounded-sm flex items-center justify-center w-7 h-7 ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-md hover:shadow-lg backdrop-blur-sm`}
           >
-            <Send className="w-4 h-4 text-gray-700" strokeWidth={2.5} />
+            <Send className="w-4 h-4 text-gray-700" strokeWidth={2} />
           </motion.button>
 
           <motion.button
@@ -298,19 +297,16 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
               transition: { duration: 0.2, ease: 'easeOut' },
             }}
             whileTap={{ scale: 0.95 }}
-            className={`p-1 lg:p-2.5 rounded-sm flex items-center justify-center w-7 h-7 lg:w-auto lg:h-auto ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-md hover:shadow-lg backdrop-blur-sm`}
+            className={`p-1 rounded-sm flex items-center justify-center w-7 h-7 ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-md hover:shadow-lg backdrop-blur-sm`}
           >
-            <MoreHorizontal
-              className="w-4 h-4 text-gray-700"
-              strokeWidth={2.5}
-            />
+            <MoreHorizontal className="w-4 h-4 text-gray-700" strokeWidth={2} />
           </motion.button>
         </motion.div>
 
         {/* Right side circular design */}
         <div className="absolute left-full top-0 h-1/2 bg-white w-[100px] rounded-tr-full z-20 hidden lg:block" />
         <div className="absolute left-full bottom-0 h-1/2 bg-white w-[100px] rounded-br-full z-20 hidden lg:block" />
-        <div className="absolute left-full top-1/2 -translate-y-1/2 w-[180px] h-[120px] lg:h-[180px] z-30 hidden lg:block">
+        <div className="absolute left-full top-1/2 -translate-y-1/2 w-[120px] h-[120px] z-30 hidden lg:block">
           {/* Center circle with linear and 3D effect */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -320,7 +316,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
               duration: 0.5,
               ease: 'easeOut',
             }}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 w-[180px] h-[120px] lg:h-[180px] rounded-full ${colors.linear} z-40 hidden lg:block`}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 w-[120px] h-[120px] rounded-full ${colors.linear} z-40 hidden lg:block`}
           >
             {/* Inner highlight for 3D effect */}
             <div className="absolute inset-0 rounded-full bg-linear-to-br from-white/30 via-transparent to-black/20" />
