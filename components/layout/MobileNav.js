@@ -33,7 +33,7 @@ export default function MobileNav({ onMenuClick }) {
   const pathname = usePathname();
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white z-50 shadow-2xl shadow-gray-300/50">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white z-999 shadow-2xl shadow-gray-300/50">
       <div className="flex items-center justify-around px-2 py-2">
         {navItems.map(({ id, label, icon: Icon, route }) => {
           const isActive = pathname === route;

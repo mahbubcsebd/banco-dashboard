@@ -76,7 +76,7 @@ export default function Sidebar({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setMobileOpen(false)}
-            className="md:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
+            className="md:hidden fixed inset-0 bg-black/50 z-80 backdrop-blur-sm"
           />
         )}
       </AnimatePresence>
@@ -89,7 +89,7 @@ export default function Sidebar({
             animate={{ x: 0 }}
             exit={{ x: -240 }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="md:hidden flex flex-col bg-white border-r border-gray-200 fixed left-0 top-0 h-screen z-50 w-60 overflow-hidden"
+            className="md:hidden flex flex-col bg-white border-r border-gray-200 fixed left-0 top-0 h-screen z-90 w-60 overflow-hidden"
           >
             {/* Logo */}
             <div className="h-16 flex items-center justify-between px-4 border-b border-gray-200">
