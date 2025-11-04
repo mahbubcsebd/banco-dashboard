@@ -193,7 +193,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
         <div className="absolute left-full bottom-0 h-1/2 bg-white w-[100px] rounded-br-full z-80 hidden lg:block" />
 
         {/* Content Section with Icon & Divider */}
-        <div className="absolute left-6 top-1/2 -translate-y-1/2 flex items-center gap-5 z-50 max-w-[55%]">
+        <div className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 flex items-center gap-3 md:gap-5 z-50 max-w-[55%]">
           {/* Icon Container */}
           <motion.div
             whileHover={{
@@ -204,11 +204,11 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
             className="relative shrink-0"
           >
             <div
-              className={`w-16 h-16 md:w-20 md:h-20 rounded-xl ${colors.linear} flex items-center justify-center text-white relative overflow-hidden`}
+              className={`w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-md md:rounded-xl ${colors.linear} flex items-center justify-center text-white relative overflow-hidden`}
             >
               <div className="absolute inset-0 bg-white opacity-10" />
               <IconComponent
-                className="w-9 h-9 relative z-10"
+                className="w-6 h-6 md:w-9 md:h-9 relative z-10"
                 strokeWidth={2}
               />
             </div>
