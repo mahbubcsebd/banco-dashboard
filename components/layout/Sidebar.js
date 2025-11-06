@@ -55,7 +55,8 @@ export default function Sidebar({
   setMobileOpen = () => {},
 }) {
   const pathname = usePathname();
-  const activeItem = pathname === '/' ? 'dashboard' : pathname.slice(1);
+  const segments = pathname.split('/').filter(Boolean); // ['', 'dashboard', 'users'] → ['dashboard', 'users']
+  const activeItem = segments[1] || segments[0] || 'dashboard';
 
   const hoverMotion = {
     rest: { x: 0, backgroundColor: 'rgba(255,255,255,0)' },
@@ -93,7 +94,7 @@ export default function Sidebar({
           >
             {/* Logo */}
             <div className="h-16 flex items-center justify-between px-4 border-b border-gray-200">
-              <Link href="/" className="flex items-center gap-2">
+              <Link href="/dashboard" className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full overflow-hidden">
                   <Image
                     src={Logo}
@@ -139,7 +140,11 @@ export default function Sidebar({
                           className="rounded-md"
                         >
                           <Link
-                            href={item.id === 'dashboard' ? '/' : `/${item.id}`}
+                            href={
+                              item.id === 'dashboard'
+                                ? '/dashboard'
+                                : `/dashboard/${item.id}`
+                            }
                             onClick={() => setMobileOpen(false)}
                             className={`w-full flex items-center gap-3 px-4 py-3 relative transition-all duration-300 rounded-md ${
                               isActive
@@ -197,7 +202,7 @@ export default function Sidebar({
         {/* Logo */}
         <div className="h-16 flex items-center justify-between px-4 border-b border-gray-200">
           {!isCollapsed ? (
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/dashboard" className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full overflow-hidden">
                 <Image
                   src={Logo}
@@ -211,7 +216,7 @@ export default function Sidebar({
             </Link>
           ) : (
             <Link
-              href="/"
+              href="/dashboard"
               className="w-8 h-8 rounded-full overflow-hidden inline-block"
             >
               <Image
@@ -259,7 +264,11 @@ export default function Sidebar({
                       className="rounded-md"
                     >
                       <Link
-                        href={item.id === 'dashboard' ? '/' : `/${item.id}`}
+                        href={
+                          item.id === 'dashboard'
+                            ? '/dashboard'
+                            : `/dashboard/${item.id}`
+                        }
                         className={`w-full flex items-center gap-3 px-4 py-3 relative transition-all duration-300 rounded-md ${
                           isActive
                             ? 'text-orange-500 bg-orange-50 shadow-sm'
