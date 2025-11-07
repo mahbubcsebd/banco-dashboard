@@ -11,16 +11,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [showOtpModal, setShowOtpModal] = useState(false);
 
+  // New state for showing messages (Success/Error) on the main page
+  const [statusMessage, setStatusMessage] = useState({
+    isVisible: false,
+    type: '', // 'success' or 'error'
+    text: '',
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset, // Added reset for form control
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
@@ -30,6 +37,9 @@ const LoginPage = () => {
   });
 
   const onSubmit = async (data) => {
+    // Clear any previous status message when starting a new login attempt
+    setStatusMessage({ isVisible: false, type: '', text: '' });
+
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -39,13 +49,37 @@ const LoginPage = () => {
   };
 
   const handleOtpVerify = (otp) => {
-    console.log('OTP verified:', otp);
-    toast.success(`You are login successfully`, {
-      position: 'bottom-right',
-    });
-    // Redirect to dashboard
+    console.log('OTP verification initiated with:', otp);
+    // 1. Close the OTP modal
+    setShowOtpModal(false);
+
+    // --- STATIC TEST LOGIC (Success: '1234', Error: anything else) ---
+    const isSuccessful = otp === '1234';
+
+    // Simulate a delay for the API call after OTP submission
+    setTimeout(() => {
+      if (isSuccessful) {
+        // SUCCESS CASE
+        setStatusMessage({
+          isVisible: true,
+          type: 'success',
+          text: 'Login Successful! You are being redirected to your dashboard.',
+        });
+        // You would typically redirect the user here
+      } else {
+        // ERROR CASE
+        setStatusMessage({
+          isVisible: true,
+          type: 'error',
+          text: 'OTP Verification Failed. The code is incorrect or expired. Please sign in again.',
+        });
+        // You might reset the form or just the password field here
+        // reset();
+      }
+    }, 500); // Small delay to simulate server check
   };
 
+  // ... (containerVariants and itemVariants remain the same) ...
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -68,7 +102,7 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 overflow-hidden">
-      {/* Background Image */}
+      {/* Background and Animated Elements */}
       <div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
         style={{
@@ -76,11 +110,7 @@ const LoginPage = () => {
             'url(https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2074&auto=format&fit=crop)',
         }}
       />
-
-      {/* Opacity Overlay */}
       <div className="fixed inset-0 bg-linear-to-br from-orange-500/20 via-white/60 to-orange-500/20 backdrop-blur-sm" />
-
-      {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <motion.div
           animate={{
@@ -147,6 +177,24 @@ const LoginPage = () => {
             </motion.div>
           </motion.div>
 
+          {/* --- NEW: STATUS MESSAGE DISPLAY --- */}
+          {statusMessage.isVisible && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.3 }}
+              className={`p-4 rounded-lg mb-6 border ${
+                statusMessage.type === 'success'
+                  ? 'bg-green-100 border-green-400 text-green-700'
+                  : 'bg-red-100 border-red-400 text-red-700'
+              } text-sm font-medium`}
+            >
+              {statusMessage.text}
+            </motion.div>
+          )}
+          {/* ---------------------------------- */}
+
           {/* Login Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             {/* User ID Input */}
@@ -208,7 +256,7 @@ const LoginPage = () => {
             </Button>
           </form>
 
-          {/* Forgot Links */}
+          {/* Forgot Links, Divider, Registration Buttons, Footer (Remaining JSX is unchanged) */}
           <div className="flex items-center justify-center gap-2 mt-4 text-sm">
             <Link
               href="/forgot-user-id"
@@ -225,14 +273,12 @@ const LoginPage = () => {
             </Link>
           </div>
 
-          {/* Divider */}
           <div className="flex items-center gap-4 my-6">
             <div className="flex-1 border-t border-gray-200"></div>
             <span className="text-sm text-gray-500 font-medium">OR</span>
             <div className="flex-1 border-t border-gray-200"></div>
           </div>
 
-          {/* Registration Buttons */}
           <div className="space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Link href="/reg-corporate-banking" className="w-full">
@@ -282,7 +328,6 @@ const LoginPage = () => {
             </div>
           </div>
 
-          {/* Footer Links */}
           <div className="mt-8 pt-6 border-t border-gray-100">
             <div className="flex items-center justify-center gap-2 text-xs text-gray-500 mb-3 flex-wrap">
               <Link

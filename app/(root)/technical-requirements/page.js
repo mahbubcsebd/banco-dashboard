@@ -6,7 +6,7 @@ export default function TechnicalRequirementPage() {
     <>
       <Banner
         //   image="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80"
-        title="Frequently Ask Question"
+        title="Technical Requirements"
         text="Build something extraordinary with us."
       />
 
