@@ -154,15 +154,15 @@ const OTPModal = ({ isOpen, onClose, onVerify }) => {
                   <InputOTPGroup className="gap-0">
                     <InputOTPSlot
                       index={0}
-                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border border-gray-300 rounded-l-lg focus:!border-orange-500 focus:!ring-0 focus:!outline-none focus:!shadow-none"
+                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border border-gray-300 rounded-l-lg focus:border-orange-500! focus:ring-0! focus:outline-none! focus:shadow-none!"
                     />
                     <InputOTPSlot
                       index={1}
-                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border-y border-r border-gray-300 focus:!border-orange-500 focus:!ring-0 focus:!outline-none focus:!shadow-none"
+                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border-y border-r border-gray-300 focus:border-orange-500! focus:ring-0! focus:outline-none! focus:shadow-none!"
                     />
                     <InputOTPSlot
                       index={2}
-                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border-y border-r border-gray-300 rounded-r-lg focus:!border-orange-500 focus:!ring-0 focus:!outline-none focus:!shadow-none"
+                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border-y border-r border-gray-300 rounded-r-lg focus:border-orange-500! focus:ring-0! focus:outline-none! focus:shadow-none!"
                     />
                   </InputOTPGroup>
                   <InputOTPSeparator>
@@ -173,15 +173,15 @@ const OTPModal = ({ isOpen, onClose, onVerify }) => {
                   <InputOTPGroup className="gap-0">
                     <InputOTPSlot
                       index={3}
-                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border border-gray-300 rounded-l-lg focus:!border-orange-500 focus:!ring-0 focus:!outline-none focus:!shadow-none"
+                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border border-gray-300 rounded-l-lg focus:border-orange-500! focus:ring-0! focus:outline-none! focus:shadow-none!"
                     />
                     <InputOTPSlot
                       index={4}
-                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border-y border-r border-gray-300 focus:!border-orange-500 focus:!ring-0 focus:!outline-none focus:!shadow-none"
+                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border-y border-r border-gray-300 focus:border-orange-500! focus:ring-0! focus:outline-none! focus:shadow-none!"
                     />
                     <InputOTPSlot
                       index={5}
-                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border-y border-r border-gray-300 rounded-r-lg focus:!border-orange-500 focus:!ring-0 focus:!outline-none focus:!shadow-none"
+                      className="w-9 h-11 sm:w-12 sm:h-14 text-lg sm:text-xl border-y border-r border-gray-300 rounded-r-lg focus:border-orange-500! focus:ring-0! focus:outline-none! focus:shadow-none!"
                     />
                   </InputOTPGroup>
                 </InputOTP>

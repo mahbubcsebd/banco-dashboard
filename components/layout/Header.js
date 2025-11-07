@@ -13,6 +13,7 @@ import {
   User,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Header({
@@ -22,6 +23,7 @@ export default function Header({
 }) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const router = useRouter();
 
   const notifications = [
     {
@@ -48,6 +50,11 @@ export default function Header({
   ];
 
   const unreadCount = notifications.filter((n) => n.unread).length;
+
+  // handle logout
+  const handleLogout = () => {
+    router.push('/');
+  };
 
   return (
     <header className="bg-white border-b border-gray-200 h-16 px-4 md:px-6 flex items-center justify-between sticky top-0 z-9999">
@@ -275,6 +282,7 @@ export default function Header({
                         x: 4,
                         backgroundColor: 'rgb(254, 242, 242)',
                       }}
+                      onClick={handleLogout}
                       className="w-full px-4 py-2.5 flex items-center gap-3 text-red-600 hover:text-red-700 transition-colors"
                     >
                       <LogOut className="w-4 h-4" />

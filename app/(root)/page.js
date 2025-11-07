@@ -1,8 +1,8 @@
 'use client';
 
 import Logo from '@/assets/icons/finxact.svg';
+import LanguageSelector from '@/components/global/LanguageSelector';
 import Button from '@/components/login/Button';
-import LanguageSelector from '@/components/login/LanguageSelector';
 import OTPModal from '@/components/login/OTPModal';
 import PasswordInput from '@/components/login/PasswordInput';
 import { motion } from 'framer-motion';
@@ -11,6 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
@@ -39,6 +40,9 @@ const LoginPage = () => {
 
   const handleOtpVerify = (otp) => {
     console.log('OTP verified:', otp);
+    toast.success(`You are login successfully`, {
+      position: 'bottom-right',
+    });
     // Redirect to dashboard
   };
 
@@ -74,7 +78,7 @@ const LoginPage = () => {
       />
 
       {/* Opacity Overlay */}
-      <div className="fixed inset-0 bg-gradient-to-br from-orange-500/20 via-white/60 to-orange-500/20 backdrop-blur-sm" />
+      <div className="fixed inset-0 bg-linear-to-br from-orange-500/20 via-white/60 to-orange-500/20 backdrop-blur-sm" />
 
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
@@ -231,42 +235,50 @@ const LoginPage = () => {
           {/* Registration Buttons */}
           <div className="space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <Button
-                variant="outline"
-                size="default"
-                icon={Building2}
-                className="w-full text-sm hover:bg-blue-50"
-              >
-                Corporate Banking
-              </Button>
+              <Link href="/reg-corporate-banking" className="w-full">
+                <Button
+                  variant="outline"
+                  size="default"
+                  icon={Building2}
+                  className="w-full text-sm hover:bg-blue-50"
+                >
+                  Corporate Banking
+                </Button>
+              </Link>
 
-              <Button
-                variant="outline"
-                size="default"
-                icon={User}
-                className="w-full text-sm hover:bg-blue-50"
-              >
-                Personal Banking
-              </Button>
+              <Link href="/reg-personal-banking" className="w-full">
+                <Button
+                  variant="outline"
+                  size="default"
+                  icon={User}
+                  className="w-full text-sm hover:bg-blue-50"
+                >
+                  Personal Banking
+                </Button>
+              </Link>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <Button
-                variant="outline"
-                size="default"
-                icon={UserPlus}
-                className="w-full text-sm hover:bg-blue-50"
-              >
-                New Customer
-              </Button>
+              <Link href="/new-customer" className="w-full">
+                <Button
+                  variant="outline"
+                  size="default"
+                  icon={UserPlus}
+                  className="w-full text-sm hover:bg-blue-50"
+                >
+                  New Customer
+                </Button>
+              </Link>
 
-              <Button
-                variant="outline"
-                size="default"
-                className="w-full text-sm hover:bg-blue-50"
-              >
-                Open an Account
-              </Button>
+              <Link href="/open-account" className="w-full">
+                <Button
+                  variant="outline"
+                  size="default"
+                  className="w-full text-sm hover:bg-blue-50"
+                >
+                  Open an Account
+                </Button>
+              </Link>
             </div>
           </div>
 
