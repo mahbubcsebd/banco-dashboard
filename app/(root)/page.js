@@ -27,7 +27,7 @@ const LoginPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset, // Added reset for form control
+    reset,
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
@@ -65,7 +65,14 @@ const LoginPage = () => {
           type: 'success',
           text: 'Login Successful! You are being redirected to your dashboard.',
         });
+
+        // Reset the form after successful login
+        reset();
+
         // You would typically redirect the user here
+        // setTimeout(() => {
+        //   router.push('/dashboard');
+        // }, 2000);
       } else {
         // ERROR CASE
         setStatusMessage({
@@ -73,13 +80,12 @@ const LoginPage = () => {
           type: 'error',
           text: 'OTP Verification Failed. The code is incorrect or expired. Please sign in again.',
         });
-        // You might reset the form or just the password field here
-        // reset();
+        // Reset form on error as well (optional)
+        reset();
       }
     }, 500); // Small delay to simulate server check
   };
 
-  // ... (containerVariants and itemVariants remain the same) ...
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -177,7 +183,7 @@ const LoginPage = () => {
             </motion.div>
           </motion.div>
 
-          {/* --- NEW: STATUS MESSAGE DISPLAY --- */}
+          {/* --- STATUS MESSAGE DISPLAY --- */}
           {statusMessage.isVisible && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -193,7 +199,6 @@ const LoginPage = () => {
               {statusMessage.text}
             </motion.div>
           )}
-          {/* ---------------------------------- */}
 
           {/* Login Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -256,7 +261,7 @@ const LoginPage = () => {
             </Button>
           </form>
 
-          {/* Forgot Links, Divider, Registration Buttons, Footer (Remaining JSX is unchanged) */}
+          {/* Forgot Links */}
           <div className="flex items-center justify-center gap-2 mt-4 text-sm">
             <Link
               href="/forgot-user-id"

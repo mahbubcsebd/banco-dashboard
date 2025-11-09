@@ -65,7 +65,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
   const IconComponent = accountIcons[account.type] || CreditCard;
 
   const handleViewAccount = () => {
-    router.push(`/accounts/${account.accountNumber}`);
+    router.push(`/dashboard/accounts/${account.accountNumber}`);
   };
 
   // Grid View
