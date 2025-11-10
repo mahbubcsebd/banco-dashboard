@@ -494,10 +494,57 @@ export const sidebarMenuItems = [
   {
     section: 'PAYMENTS & TRANSFERS',
     items: [
-      { id: 'transfers', label: 'Transfers', icon: 'transfer' },
-      { id: 'bill-payments', label: 'Bill Payments', icon: 'send' },
-      { id: 'p2p-payments', label: 'P2P Payments', icon: 'users' },
-      { id: 'mobile-topup', label: 'Mobile Top-Up', icon: 'mobile' },
+      {
+        id: 'transfers',
+        label: 'Transfers',
+        icon: 'transfer',
+        submenu: [
+          {
+            id: 'transfers-between-accounts',
+            label: 'Between my Accounts At MCB Bank',
+          },
+          {
+            id: 'transfers-other-mcb',
+            label: 'Transfer to Other MCB Bank Account',
+          },
+          { id: 'transfers-local-bank', label: 'Transfer to Other Local Bank' },
+          { id: 'transfers-history', label: 'Transfer History' },
+          { id: 'transfers-scheduled', label: 'Scheduled Transfers' },
+          { id: 'transfers-manage-payees', label: 'Manage Payees' },
+        ],
+      },
+      {
+        id: 'bill-payments',
+        label: 'Bill Payments',
+        icon: 'send',
+        submenu: [
+          { id: 'bill-payments-pay', label: 'Pay Bills' },
+          {
+            id: 'bill-payments-scheduled',
+            label: 'Manage Scheduled Bill Payments',
+          },
+          { id: 'bill-payments-billers', label: 'Manage Billers' },
+          { id: 'bill-payments-history', label: 'Payment History' },
+        ],
+      },
+      {
+        id: 'p2p-payments',
+        label: 'P2P Payments',
+        icon: 'users',
+        submenu: [
+          { id: 'p2p-send', label: 'Send Money' },
+          { id: 'p2p-receive', label: 'Receive Money' },
+        ],
+      },
+      {
+        id: 'mobile-topup',
+        label: 'Mobile Top-Up',
+        icon: 'mobile',
+        submenu: [
+          { id: 'mobile-recharge', label: 'Recharge Mobile' },
+          { id: 'mobile-manage', label: 'Manage Numbers' },
+        ],
+      },
       { id: 'support', label: 'Support', icon: 'support' },
       { id: 'secure-messages', label: 'Secure Messages', icon: 'message' },
       { id: 'find-branch', label: 'Find Branch/ATM', icon: 'location' },
@@ -509,8 +556,23 @@ export const sidebarMenuItems = [
   {
     section: 'SETTINGS',
     items: [
-      { id: 'profile', label: 'Profile', icon: 'user' },
-      { id: 'security', label: 'Security', icon: 'lock' },
+      {
+        id: 'profile',
+        label: 'Profile',
+        icon: 'user',
+        submenu: [{ id: 'profile-personal', label: 'Personal Information' }],
+      },
+      {
+        id: 'security',
+        label: 'Security',
+        icon: 'lock',
+        submenu: [
+          { id: 'security-password', label: 'Change Password' },
+          { id: 'security-questions', label: 'Security Questions' },
+          { id: 'security-history', label: 'Session History' },
+          { id: 'security-fraud', label: 'Report Fraud' },
+        ],
+      },
     ],
   },
   {
