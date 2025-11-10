@@ -48,7 +48,7 @@ export default function ModalsPage() {
   ];
 
   return (
-    <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto">
+    <div className="">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
