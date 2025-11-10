@@ -54,7 +54,7 @@ const LoginPage = () => {
     setShowOtpModal(false);
 
     // --- STATIC TEST LOGIC (Success: '1234', Error: anything else) ---
-    const isSuccessful = true;
+    const isSuccessful = false;
 
     // Simulate a delay for the API call after OTP submission
     setTimeout(() => {

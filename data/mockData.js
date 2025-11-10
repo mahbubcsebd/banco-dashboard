@@ -513,4 +513,180 @@ export const sidebarMenuItems = [
       { id: 'security', label: 'Security', icon: 'lock' },
     ],
   },
+  {
+    section: 'Demo Modal',
+    items: [{ id: 'modal', label: 'Modal', icon: 'user' }],
+  },
 ];
+
+// Account Statements Data
+export const accountStatements = {
+  11000102445: [
+    // Current Account
+    // 2024
+    {
+      month: 'October 2024',
+      year: '2024',
+      date: '2024-10-31',
+      pdfUrl: '/statements/11000102445-oct-2024.pdf',
+    },
+    {
+      month: 'September 2024',
+      year: '2024',
+      date: '2024-09-30',
+      pdfUrl: '/statements/11000102445-sep-2024.pdf',
+    },
+    {
+      month: 'August 2024',
+      year: '2024',
+      date: '2024-08-31',
+      pdfUrl: '/statements/11000102445-aug-2024.pdf',
+    },
+    // 2023
+    {
+      month: 'December 2023',
+      year: '2023',
+      date: '2023-12-31',
+      pdfUrl: '/statements/11000102445-dec-2023.pdf',
+    },
+    {
+      month: 'November 2023',
+      year: '2023',
+      date: '2023-11-30',
+      pdfUrl: '/statements/11000102445-nov-2023.pdf',
+    },
+    // 2022
+    {
+      month: 'June 2022',
+      year: '2022',
+      date: '2022-06-30',
+      pdfUrl: '/statements/11000102445-jun-2022.pdf',
+    },
+  ],
+
+  21000160070: [
+    // Savings Account 1
+    // 2024
+    {
+      month: 'October 2024',
+      year: '2024',
+      date: '2024-10-31',
+      pdfUrl: '/statements/21000160070-oct-2024.pdf',
+    },
+    {
+      month: 'September 2024',
+      year: '2024',
+      date: '2024-09-30',
+      pdfUrl: '/statements/21000160070-sep-2024.pdf',
+    },
+    // 2023
+    {
+      month: 'December 2023',
+      year: '2023',
+      date: '2023-12-31',
+      pdfUrl: '/statements/21000160070-dec-2023.pdf',
+    },
+    {
+      month: 'November 2023',
+      year: '2023',
+      date: '2023-11-30',
+      pdfUrl: '/statements/21000160070-nov-2023.pdf',
+    },
+    // 2022
+    {
+      month: 'May 2022',
+      year: '2022',
+      date: '2022-05-31',
+      pdfUrl: '/statements/21000160070-may-2022.pdf',
+    },
+  ],
+
+  21000160071: [
+    // Investment Account
+    // 2024
+    {
+      month: 'October 2024',
+      year: '2024',
+      date: '2024-10-31',
+      pdfUrl: '/statements/21000160071-oct-2024.pdf',
+    },
+    {
+      month: 'September 2024',
+      year: '2024',
+      date: '2024-09-30',
+      pdfUrl: '/statements/21000160071-sep-2024.pdf',
+    },
+    {
+      month: 'July 2024',
+      year: '2024',
+      date: '2024-07-31',
+      pdfUrl: '/statements/21000160071-jul-2024.pdf',
+    },
+    // 2023
+    {
+      month: 'March 2023',
+      year: '2023',
+      date: '2023-03-31',
+      pdfUrl: '/statements/21000160071-mar-2023.pdf',
+    },
+    {
+      month: 'January 2023',
+      year: '2023',
+      date: '2023-01-31',
+      pdfUrl: '/statements/21000160071-jan-2023.pdf',
+    },
+    // 2022
+    {
+      month: 'June 2022',
+      year: '2022',
+      date: '2022-06-30',
+      pdfUrl: '/statements/21000160071-jun-2022.pdf',
+    },
+  ],
+
+  21000160072: [
+    // Savings Account 2
+    // 2024
+    {
+      month: 'October 2024',
+      year: '2024',
+      date: '2024-10-31',
+      pdfUrl: '/statements/21000160072-oct-2024.pdf',
+    },
+    {
+      month: 'September 2024',
+      year: '2024',
+      date: '2024-09-30',
+      pdfUrl: '/statements/21000160072-sep-2024.pdf',
+    },
+    // 2023
+    {
+      month: 'December 2023',
+      year: '2023',
+      date: '2023-12-31',
+      pdfUrl: '/statements/21000160072-dec-2023.pdf',
+    },
+    {
+      month: 'October 2023',
+      year: '2023',
+      date: '2023-10-31',
+      pdfUrl: '/statements/21000160072-oct-2023.pdf',
+    },
+    // 2022
+    {
+      month: 'April 2022',
+      year: '2022',
+      date: '2022-04-30',
+      pdfUrl: '/statements/21000160072-apr-2022.pdf',
+    },
+  ],
+};
+
+// Helper function to get statements by account and year
+export const getStatementsByAccount = (accountNumber, year = null) => {
+  const statements = accountStatements[accountNumber] || [];
+  if (year) {
+    return statements.filter((statement) => statement.year === year);
+  }
+  return statements;
+};
