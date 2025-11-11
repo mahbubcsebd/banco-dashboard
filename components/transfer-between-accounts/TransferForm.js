@@ -146,6 +146,24 @@ const TransferForm = ({ onSubmit, isSubmitting = false }) => {
             </label>
           </div>
         </div>
+        {/* Transfer Type Buttons - Styled to look like the image's "Immediate/Scheduled" buttons */}
+        <div className="flex justify-end gap-2 p-1 border border-gray-300 rounded-md bg-gray-50">
+          {transferTypeOptions.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              onClick={() => handleChange('transferType', option.value)}
+              className={`px-4 py-2 text-sm font-medium rounded transition-colors w-full
+                  ${
+                    formData.transferType === option.value
+                      ? 'bg-orange-500 text-white shadow-md'
+                      : 'bg-transparent text-gray-700 hover:bg-gray-200'
+                  }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
 
         <GlobalInput
           label="Description"
