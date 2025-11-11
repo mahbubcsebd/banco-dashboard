@@ -67,7 +67,7 @@ const ForgotUserIDPage = () => {
       />
 
       {/* Opacity Overlay */}
-      <div className="fixed inset-0 bg-gradient-to-br from-orange-500/20 via-white/60 to-orange-500/20 backdrop-blur-sm" />
+      <div className="fixed inset-0 bg-linear-to-br from-orange-500/20 via-white/60 to-orange-500/20 backdrop-blur-sm" />
 
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
@@ -132,7 +132,7 @@ const ForgotUserIDPage = () => {
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
               Forgot User ID
             </h2>
-            <div className="h-1 w-20 bg-gradient-to-r from-orange-400 to-orange-600 mx-auto rounded-full" />
+            <div className="h-1 w-20 bg-linear-to-r from-orange-400 to-orange-600 mx-auto rounded-full" />
           </div>
 
           {/* Form */}
