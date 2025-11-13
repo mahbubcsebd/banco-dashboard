@@ -49,7 +49,7 @@ const HistoryFilterForm = ({
           {/* Date From (using GlobalInput with Calendar icon placeholder) */}
           <div className="relative">
             <GlobalInput
-              label="Date From *"
+              label="Date From"
               type="text" // Using text to display mm/dd/yyyy format
               placeholder="mm/dd/yyyy"
               value={filters.dateFrom}
@@ -62,7 +62,7 @@ const HistoryFilterForm = ({
           {/* Date To */}
           <div className="relative">
             <GlobalInput
-              label="Date To *"
+              label="Date To"
               type="text"
               placeholder="mm/dd/yyyy"
               value={filters.dateTo}

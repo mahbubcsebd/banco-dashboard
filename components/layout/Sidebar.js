@@ -5,6 +5,7 @@ import { sidebarMenuItems } from '@/data/mockData';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowLeftRight,
+  Bell,
   Building2,
   Calendar,
   ChevronDown,
@@ -48,6 +49,7 @@ const iconMap = {
   mail: Mail,
   user: User,
   lock: Lock,
+  notification: Bell,
 };
 
 export default function Sidebar({

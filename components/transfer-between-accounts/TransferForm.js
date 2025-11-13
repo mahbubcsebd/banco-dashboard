@@ -15,6 +15,11 @@ const TransferForm = ({ onSubmit, isSubmitting = false }) => {
     transferType: 'immediate',
   });
 
+  const transferTypeOptions = [
+    { value: 'immediate', label: 'Immediate' },
+    { value: 'scheduled', label: 'Scheduled' },
+  ];
+
   const [errors, setErrors] = useState({});
 
   const accountOptions = [

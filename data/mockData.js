@@ -576,6 +576,12 @@ export const sidebarMenuItems = [
     ],
   },
   {
+    section: 'Message and Notification',
+    items: [
+      { id: 'notification', label: 'Notification', icon: 'notification' },
+    ],
+  },
+  {
     section: 'Demo Modal',
     items: [{ id: 'modal', label: 'Modal', icon: 'user' }],
   },

@@ -122,7 +122,7 @@ const EditBillTemplateModal = ({ isOpen, onClose, billerData, onSubmit }) => {
 
             {/* Currency */}
             <GlobalSelect
-              label="Currency *"
+              label="Currency"
               required
               placeholder="USD"
               value={formData.currency}
@@ -133,7 +133,7 @@ const EditBillTemplateModal = ({ isOpen, onClose, billerData, onSubmit }) => {
 
             {/* Reference No. */}
             <GlobalInput
-              label="Reference No. *"
+              label="Reference No."
               required
               placeholder="135246789"
               value={formData.referenceNumber}

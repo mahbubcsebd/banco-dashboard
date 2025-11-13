@@ -46,7 +46,7 @@ const PaymentHistoryFilter = ({
           {/* Date From */}
           <div className="relative">
             <GlobalInput
-              label="Date From *"
+              label="Date From"
               type="text"
               placeholder="mm/dd/yyyy"
               value={filters.dateFrom}
@@ -59,7 +59,7 @@ const PaymentHistoryFilter = ({
           {/* Date To */}
           <div className="relative">
             <GlobalInput
-              label="Date To *"
+              label="Date To"
               type="text"
               placeholder="mm/dd/yyyy"
               value={filters.dateTo}
