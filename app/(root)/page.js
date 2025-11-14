@@ -276,11 +276,9 @@ const LoginPage = () => {
                 Sign In Securely
               </Button>
               <Button
-                type="submit"
                 variant="primary"
                 size="default"
-                loading={loading}
-                className="w-full bg-blue-600"
+                className="w-full bg-blue-600 md:hidden"
                 // icon={LogIn}
               >
                 Sign In with face ID
