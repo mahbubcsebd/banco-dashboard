@@ -38,11 +38,3 @@ const BranchList = ({ branches, onSelectBranch }) => {
 };
 
 export default BranchList;
-
-// Mock Data Structure for API Integration
-/*
-const mockBranches = [
-  { id: 1, name: "Branch 1 (HQ)", address: "11180 Lee Hwy, Fairfax, VA-22030", lat: 38.85, lng: -77.38, distance: "2.5 mi" },
-  { id: 2, name: "Branch 2 (Downtown)", address: "9200 Centreville Rd, Manassas, VA", lat: 38.78, lng: -77.46, distance: "5.1 mi" },
-];
-*/

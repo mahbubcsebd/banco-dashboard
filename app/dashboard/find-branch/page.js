@@ -3,10 +3,10 @@
 import BranchAtmResults from '@/components/find-branch/BranchAtmResults';
 import BranchAtmSearch from '@/components/find-branch/BranchAtmSearch';
 import HeaderTop from '@/components/global/HeaderTop';
-import { MapPin } from 'lucide-react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { useState } from 'react';
 
-// --- MOCK DATA ---
+// Mock data
 const MOCK_LOCATIONS = [
   {
     id: 1,
@@ -15,8 +15,11 @@ const MOCK_LOCATIONS = [
     lat: 38.85,
     lng: -77.38,
     type: 'Branch',
-    time: '09:00 AM - 04:00 PM',
+    time: '09:00 am - 04:00 pm',
     phone: '7035532497',
+    fax: '7035524987',
+    distance: '1 mi',
+    duration: '1 min',
   },
   {
     id: 2,
@@ -25,8 +28,11 @@ const MOCK_LOCATIONS = [
     lat: 38.78,
     lng: -77.46,
     type: 'Branch',
-    time: '09:00 AM - 05:00 PM',
-    phone: '7035532497',
+    time: '09:00 am - 05:00 pm',
+    phone: '70336870',
+    fax: '70336870',
+    distance: '21.6 km',
+    duration: '25 mins',
   },
   {
     id: 3,
@@ -37,6 +43,7 @@ const MOCK_LOCATIONS = [
     type: 'ATM',
     time: '24 Hours',
     phone: 'N/A',
+    fax: 'N/A',
   },
   {
     id: 4,
@@ -45,8 +52,9 @@ const MOCK_LOCATIONS = [
     lat: 30.32,
     lng: -81.65,
     type: 'Branch',
-    time: '09:00 AM - 04:00 PM',
+    time: '09:00 am - 04:00 pm',
     phone: '7035532497',
+    fax: '7035532497',
   },
   {
     id: 5,
@@ -57,45 +65,72 @@ const MOCK_LOCATIONS = [
     type: 'ATM',
     time: '24 Hours',
     phone: 'N/A',
+    fax: 'N/A',
   },
 ];
-// --- MOCK DATA END ---
 
-// --- Placeholder for Google Map (Reusable from Contact Us page) ---
-const GoogleMapPlaceholder = ({ branches, selectedBranch }) => {
+const GoogleMapComponent = ({ branches, selectedBranch, onSelectBranch }) => {
   const center = selectedBranch
     ? { lat: selectedBranch.lat, lng: selectedBranch.lng }
+    : branches.length > 0
+    ? { lat: branches[0].lat, lng: branches[0].lng }
     : { lat: 30.33, lng: -81.65 };
 
+  const mapOptions = {
+    disableDefaultUI: false,
+    zoomControl: true,
+    streetViewControl: false,
+    mapTypeControl: false,
+    fullscreenControl: true,
+  };
+
   return (
-    <div className="w-full h-full min-h-[400px] bg-gray-200 rounded-lg overflow-hidden relative">
-      <div className="absolute inset-0 bg-map-pattern opacity-5"></div>
-
-      {/* Map Content (Mock) */}
-      <div className="text-center p-4">
-        <h4 className="text-xl font-bold text-gray-700 z-10">
-          Map Visualization
-        </h4>
-        <p className="text-sm text-orange-600 z-10 mt-1">
-          Center: {center.lat.toFixed(2)}, {center.lng.toFixed(2)}
-        </p>
-      </div>
-
-      {/* Mock Pins */}
-      {branches.map((branch, index) => (
-        <div
-          key={branch.id}
-          className={`absolute flex flex-col items-center`}
-          // Simplified positioning based on index for visual diversity
-          style={{ top: `${20 + index * 10}%`, left: `${20 + index * 15}%` }}
+    <div className="w-full h-full rounded-lg overflow-hidden bg-gray-100">
+      <LoadScript
+        googleMapsApiKey="AIzaSyBLsfAvQX6j_mF_ElU3oelgLFokalRnUxM"
+        loadingElement={
+          <div className="w-full h-full flex items-center justify-center">
+            <div className="text-center">
+              <div className="w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mx-auto mb-3" />
+              <p className="text-sm text-gray-600">Loading map...</p>
+            </div>
+          </div>
+        }
+      >
+        <GoogleMap
+          mapContainerStyle={{ width: '100%', height: '100%' }}
+          center={center}
+          zoom={selectedBranch ? 15 : 11}
+          options={mapOptions}
         >
-          <MapPin
-            className={`w-8 h-8 ${
-              branch === selectedBranch ? 'text-red-600' : 'text-blue-600/70'
-            } fill-current`}
-          />
-        </div>
-      ))}
+          {branches.map((branch) => (
+            <Marker
+              key={branch.id}
+              position={{ lat: branch.lat, lng: branch.lng }}
+              onClick={() => onSelectBranch(branch)}
+              icon={{
+                path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
+                fillColor:
+                  selectedBranch?.id === branch.id
+                    ? '#dc2626'
+                    : branch.type === 'Branch'
+                    ? '#3b82f6'
+                    : '#f97316',
+                fillOpacity: 1,
+                strokeWeight: 2,
+                strokeColor: '#fff',
+                scale: selectedBranch?.id === branch.id ? 2.5 : 2,
+                anchor: { x: 12, y: 22 },
+              }}
+              animation={
+                selectedBranch?.id === branch.id
+                  ? window.google?.maps?.Animation?.BOUNCE
+                  : null
+              }
+            />
+          ))}
+        </GoogleMap>
+      </LoadScript>
     </div>
   );
 };
@@ -103,30 +138,39 @@ const GoogleMapPlaceholder = ({ branches, selectedBranch }) => {
 export default function FindBranchAtmPage() {
   const [loading, setLoading] = useState(false);
   const [locations, setLocations] = useState(MOCK_LOCATIONS);
-  const [filters, setFilters] = useState({ branches: true, atms: true }); // Both checked by default
+  const [filters, setFilters] = useState({ branches: true, atms: true });
   const [selectedBranch, setSelectedBranch] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = (query) => {
     if (!query) return;
     setLoading(true);
-    // 🌟 API Call Simulation 🌟
+    setHasSearched(true);
+
     setTimeout(() => {
-      // Mock filter logic based on query matching 'Jacksonville' or 'Fairfax' areas
       const filtered = MOCK_LOCATIONS.filter(
         (loc) =>
           loc.address.toLowerCase().includes(query.toLowerCase()) ||
           loc.name.toLowerCase().includes(query.toLowerCase())
       );
 
-      setLocations(filtered.length > 0 ? filtered : MOCK_LOCATIONS); // If no match, show all
-      setSelectedBranch(filtered[0] || null); // Select first result to center map
+      setLocations(filtered.length > 0 ? filtered : []);
+      setSelectedBranch(filtered[0] || null);
       setLoading(false);
-    }, 1500);
+    }, 1000);
+  };
+
+  const handleClear = () => {
+    setLocations(MOCK_LOCATIONS);
+    setSelectedBranch(null);
+    setHasSearched(false);
   };
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
-    setSelectedBranch(null); // Clear selection when filter changes
+    if (!hasSearched) {
+      setSelectedBranch(null);
+    }
   };
 
   const filteredLocations = locations.filter(
@@ -136,32 +180,48 @@ export default function FindBranchAtmPage() {
   );
 
   return (
-    <div className="p-6">
-      <HeaderTop
-        title="Find a Branch or ATM"
-        text="Locate our branches and ATMs near you"
-        link="/dashboard"
-        linkText="Back to Dashboard"
-      />
-
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 md:p-8 max-w-7xl mx-auto space-y-6">
-        {/* Search and Filter Component */}
-        <BranchAtmSearch
-          onSearch={handleSearch}
-          loading={loading}
-          filters={filters}
-          onFilterChange={handleFilterChange}
+    <div className="min-h-screen bg-gray-50 p-4 lg:p-6">
+      <div className="max-w-7xl mx-auto space-y-4 lg:space-y-6">
+        {/* Header */}
+        <HeaderTop
+          title="Find a Branch or ATM"
+          text="Locate our branches and ATMs near you"
+          link="/dashboard"
+          linkText="Back to Dashboard"
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-          {/* Left Column: Results List */}
-          <div className="lg:col-span-1">
-            <BranchAtmResults
-              locations={filteredLocations}
-              loading={loading}
-              onSelectBranch={setSelectedBranch}
-              selectedBranch={selectedBranch}
-            />
+        {/* Main Content Card */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 lg:p-6">
+          {/* Search */}
+          <BranchAtmSearch
+            onSearch={handleSearch}
+            onClear={handleClear}
+            loading={loading}
+            filters={filters}
+            onFilterChange={handleFilterChange}
+            hasSearched={hasSearched}
+          />
+
+          {/* Results Grid - Responsive */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+            {/* Map - Shows first on mobile */}
+            <div className="order-1 lg:order-2 h-[50vh] lg:h-[600px] lg:sticky lg:top-8">
+              <GoogleMapComponent
+                branches={filteredLocations}
+                selectedBranch={selectedBranch}
+                onSelectBranch={setSelectedBranch}
+              />
+            </div>
+
+            {/* Results - Shows second on mobile */}
+            <div className="order-2 lg:order-1">
+              <BranchAtmResults
+                locations={filteredLocations}
+                loading={loading}
+                onSelectBranch={setSelectedBranch}
+                selectedBranch={selectedBranch}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -59,7 +59,7 @@ const ActivityLog = ({ data }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.2, delay: index * 0.05 }}
-                    className="grid grid-cols-[1fr_5fr] gap-4 py-3 px-6 border-l-4 border-orange-500 bg-white hover:bg-orange-50/50 transition-colors border-dashed last:border-b-0"
+                    className="grid grid-cols-[1fr_5fr] gap-4 py-3 px-6 border-orange-500 bg-white hover:bg-orange-50/50 transition-colors last:border-b-0"
                   >
                     {/* Time (First column) */}
                     <span className="text-sm font-medium text-gray-600">

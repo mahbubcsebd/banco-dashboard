@@ -16,16 +16,26 @@ const navItems = [
     id: 'transfers',
     label: 'Transfer',
     icon: ArrowLeftRight,
-    route: '/transfers',
+    route: '/dashboard/landing/transfers',
   },
   {
     id: 'bill-payments',
     label: 'Bill Pay',
     icon: Send,
-    route: '/bill-payments',
+    route: '/dashboard/landing/bill-pay',
   },
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, route: '/' },
-  { id: 'mobile-topup', label: 'Top-Up', icon: Upload, route: '/mobile-topup' },
+  {
+    id: 'dashboard',
+    label: 'Dashboard',
+    icon: LayoutDashboard,
+    route: '/dashboard',
+  },
+  {
+    id: 'mobile-topup',
+    label: 'Top-Up',
+    icon: Upload,
+    route: '/dashboard/landing/mobile-topup',
+  },
   { id: 'more', label: 'More', icon: MoreHorizontal, route: null },
 ];
 

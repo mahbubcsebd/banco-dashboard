@@ -5,14 +5,33 @@ import GlobalInput from '@/components/global/GlobalInput';
 import LanguageSelector from '@/components/global/LanguageSelector';
 import Button from '@/components/login/Button';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-const ForgotPasswordPage = () => {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' },
+  },
+};
+
+const ActivateUserPage = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -24,13 +43,14 @@ const ForgotPasswordPage = () => {
     mode: 'onBlur',
     defaultValues: {
       userId: '',
-      dateOfBirth: '',
+      accountNumber: '',
+      email: '',
     },
   });
 
   const onSubmit = async (data) => {
     setLoading(true);
-    console.log('Forgot Password Data:', data);
+    console.log('Activate User Data:', data);
     setTimeout(() => {
       setLoading(false);
       // Handle success - redirect or show success message
@@ -87,41 +107,38 @@ const ForgotPasswordPage = () => {
         className="w-full max-w-2xl z-10"
       >
         <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-6 sm:p-8 md:p-10 border border-white/20">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-6">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-gray-600 hover:text-orange-500 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span className="text-sm font-medium">Back</span>
-            </Link>
-
+          {/* Language Selector */}
+          <div className="flex justify-end mb-4 lg:mb-6">
             <LanguageSelector />
           </div>
 
-          {/* Logo */}
-          <div className="flex justify-center mb-6">
-            <Image
-              src={Logo}
-              alt="logo"
-              className="h-8 sm:h-10 w-auto object-cover"
-            />
-          </div>
-
-          {/* Title */}
-          <div className="text-center mb-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-              Forgot Password
-            </h2>
-            {/* <div className="h-1 w-20 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto rounded-full" /> */}
-          </div>
-
-          {/* Description */}
-          <p className="text-center text-sm sm:text-base text-gray-600 mb-6 px-4">
-            To reset your password, we need some information to verify your
-            identity. If you need future assistance, please contact us.
-          </p>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-center mb-4 md:mb-8"
+          >
+            <Link href="/" className="inline-block">
+              <motion.div
+                variants={itemVariants}
+                className="flex justify-center md:mb-4 w-[140px] lg:w-[180px] mx-auto"
+              >
+                <Image
+                  src={Logo}
+                  alt="logo"
+                  className="w-full h-auto object-cover"
+                />
+              </motion.div>
+            </Link>
+            <motion.div
+              variants={itemVariants}
+              className="mt-6 mb-2 hidden md:block"
+            >
+              <h2 className="text-2xl font-semibold text-gray-800">
+                Active Device
+              </h2>
+            </motion.div>
+          </motion.div>
 
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -141,16 +158,40 @@ const ForgotPasswordPage = () => {
               error={errors.userId?.message}
             />
 
-            {/* Date of Birth */}
+            {/* Account Number */}
             <GlobalInput
-              label="Date of Birth"
-              type="date"
-              placeholder="mm/dd/yyyy"
+              label="Account Number"
+              type="text"
+              placeholder="Enter your account number"
               required
-              {...register('dateOfBirth', {
-                required: 'Date of birth is required',
+              {...register('accountNumber', {
+                required: 'Account number is required',
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: 'Account number must contain only numbers',
+                },
+                minLength: {
+                  value: 5,
+                  message: 'Account number must be at least 5 digits',
+                },
               })}
-              error={errors.dateOfBirth?.message}
+              error={errors.accountNumber?.message}
+            />
+
+            {/* Email */}
+            <GlobalInput
+              label="Email"
+              type="email"
+              placeholder="Enter your email address"
+              required
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Invalid email address',
+                },
+              })}
+              error={errors.email?.message}
             />
 
             {/* Submit Button */}
@@ -159,10 +200,10 @@ const ForgotPasswordPage = () => {
                 type="submit"
                 variant="primary"
                 size="default"
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full bg-orange-500 hover:bg-orange-600"
                 loading={loading}
               >
-                Submit
+                SUBMIT
               </Button>
             </div>
           </form>
@@ -179,4 +220,4 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export default ForgotPasswordPage;
+export default ActivateUserPage;

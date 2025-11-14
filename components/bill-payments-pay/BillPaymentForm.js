@@ -2,9 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+// import Button from '../login/Button'; /login/ Assuming this Button component is available
 import GlobalInput from '../global/GlobalInput';
 import GlobalSelect from '../global/GlobalSelect';
-import Button from '../login/Button'; // Assuming this Button component is available
+import Button from '../login/Button';
 
 const accountOptions = [
   { value: '210001002331', label: 'Savings Account (***2331)' },

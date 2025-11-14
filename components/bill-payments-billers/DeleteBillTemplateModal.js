@@ -1,6 +1,5 @@
 'use client';
 
-// Use shadcn Dialog components
 import {
   Dialog,
   DialogContent,

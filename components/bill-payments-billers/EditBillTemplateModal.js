@@ -13,7 +13,6 @@ import GlobalInput from '../global/GlobalInput';
 import GlobalSelect from '../global/GlobalSelect';
 import Button from '../login/Button';
 
-// Mock options for Currency
 const currencyOptions = [
   { value: 'USD', label: 'USD' },
   { value: 'EUR', label: 'EUR' },
@@ -21,7 +20,6 @@ const currencyOptions = [
 ];
 
 const EditBillTemplateModal = ({ isOpen, onClose, billerData, onSubmit }) => {
-  // Initialize state with default or provided data
   const [formData, setFormData] = useState({
     billerName: '',
     billerTemplateName: '',
@@ -30,29 +28,26 @@ const EditBillTemplateModal = ({ isOpen, onClose, billerData, onSubmit }) => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Effect to populate form when modal opens or billerData changes
   useEffect(() => {
     if (billerData) {
       setFormData({
         billerName: billerData.billerName || '',
-        billerTemplateName: billerData.billerName || '', // Using billerName as template name default
+        billerTemplateName: billerData.billerName || '',
         currency: billerData.currency || 'USD',
         referenceNumber: billerData.referenceNumber || '',
       });
-      setErrors({}); // Reset errors when new data is loaded
+      setErrors({});
     }
   }, [billerData, isOpen]);
 
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    setErrors((prev) => ({ ...prev, [field]: '' })); // Clear error on change
+    setErrors((prev) => ({ ...prev, [field]: '' }));
   };
 
   const validate = () => {
     const newErrors = {};
 
-    // Validation logic
     if (!formData.billerTemplateName.trim()) {
       newErrors.billerTemplateName = 'Biller Template Name is required.';
     }
@@ -73,9 +68,8 @@ const EditBillTemplateModal = ({ isOpen, onClose, billerData, onSubmit }) => {
     if (validate()) {
       setIsSubmitting(true);
 
-      console.log('Submitting edited template:', formData); // Console log for submission
+      console.log('Submitting edited template:', formData);
 
-      // Simulate API call
       setTimeout(() => {
         onSubmit(formData);
         setIsSubmitting(false);

@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-// Assuming GlobalInput is imported from where you provided the code
 import GlobalInput from '../global/GlobalInput';
 import Button from '../login/Button';
 
@@ -49,7 +48,6 @@ const ChangePasswordForm = ({ onSubmit, isSubmitting = false }) => {
     e.preventDefault();
     if (validate() && onSubmit) {
       onSubmit(formData);
-      // Reset the form locally after successful submission attempt
       setFormData({ oldPassword: '', newPassword: '', reEnterPassword: '' });
     }
   };
@@ -65,10 +63,10 @@ const ChangePasswordForm = ({ onSubmit, isSubmitting = false }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8 max-w-2xl mx-auto"
+      className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8 max-w-lg mx-auto"
     >
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           <GlobalInput
             label="Old Password"
             name="oldPassword"
@@ -91,7 +89,7 @@ const ChangePasswordForm = ({ onSubmit, isSubmitting = false }) => {
             error={errors.newPassword}
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           <GlobalInput
             label="Re-enter New Password"
             name="reEnterPassword"

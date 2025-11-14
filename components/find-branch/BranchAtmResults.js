@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
-import { Clock, Link, MapPin, Phone } from 'lucide-react'; // Used Link to mock Fax
+'use client';
+
+import { Clock, Loader2, MapPin, Phone, Printer } from 'lucide-react';
 
 const BranchAtmResults = ({
   locations,
@@ -9,87 +10,107 @@ const BranchAtmResults = ({
 }) => {
   if (loading) {
     return (
-      <div className="text-center p-10">
-        <Loader2 className="w-8 h-8 animate-spin text-orange-500 mx-auto" />
-      </div>
-    );
-  }
-
-  if (locations.length === 0) {
-    return (
-      <div className="text-center p-10 text-gray-500 bg-white rounded-lg border border-dashed border-gray-300">
-        Showing 0 locations
+      <div className="flex flex-col items-center justify-center p-10">
+        <Loader2 className="w-8 h-8 animate-spin text-orange-500 mb-3" />
+        <p className="text-sm text-gray-600">Loading locations...</p>
       </div>
     );
   }
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-semibold text-gray-800">
-        Branches{' '}
-        <span className="text-sm font-normal text-gray-600">
-          Showing {locations.length} locations
+      {/* Header */}
+      <div className="flex items-baseline gap-2">
+        <h3 className="text-xl font-semibold text-gray-800">Branches</h3>
+        <span className="text-sm text-gray-600">
+          Showing {locations.length} location{locations.length !== 1 ? 's' : ''}
         </span>
-      </h3>
-
-      <div className="divide-y divide-gray-100 border border-gray-200 rounded-lg max-h-[600px] overflow-y-auto">
-        {locations.map((branch, index) => (
-          <motion.div
-            key={branch.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.05 }}
-            onClick={() => onSelectBranch(branch)}
-            className={`p-4 transition-colors cursor-pointer ${
-              selectedBranch?.id === branch.id
-                ? 'bg-blue-50 border-blue-600 border-l-4'
-                : 'hover:bg-gray-50'
-            }`}
-          >
-            <div className="flex items-center space-x-2 mb-2">
-              <MapPin
-                className={`w-5 h-5 ${
-                  branch.type === 'Branch' ? 'text-blue-600' : 'text-orange-600'
-                }`}
-              />
-              <p className="font-semibold text-gray-900">{branch.name}</p>
-            </div>
-
-            <div className="space-y-1 text-sm text-gray-700 ml-7">
-              <p className="text-gray-600">{branch.address}</p>
-
-              {/* Distance */}
-              {branch.distance && (
-                <p className="text-xs text-gray-500">
-                  {branch.distance} (1 min)
-                </p>
-              )}
-
-              {/* Hours */}
-              <p className="flex items-center space-x-2">
-                <Clock className="w-4 h-4 text-gray-400" />
-                <span>{branch.time}</span>
-              </p>
-
-              {/* Phone */}
-              {branch.phone !== 'N/A' && (
-                <p className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4 text-gray-400" />
-                  <span>Phone Number: {branch.phone}</span>
-                </p>
-              )}
-
-              {/* Fax (Mocking for the look) */}
-              {branch.phone !== 'N/A' && (
-                <p className="flex items-center space-x-2">
-                  <Link className="w-4 h-4 text-gray-400" />
-                  <span>Fax Number: {branch.phone}</span>
-                </p>
-              )}
-            </div>
-          </motion.div>
-        ))}
       </div>
+
+      {/* Results */}
+      {locations.length === 0 ? (
+        <div className="text-center p-10 text-gray-500 bg-white rounded-lg border border-gray-200">
+          <MapPin className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+          <p className="font-medium">No locations found</p>
+          <p className="text-sm mt-1">Try adjusting your search or filters</p>
+        </div>
+      ) : (
+        <div className="space-y-0 border border-gray-200 rounded-lg overflow-hidden max-h-[calc(100vh-20rem)] overflow-y-auto">
+          {locations.map((branch) => (
+            <div
+              key={branch.id}
+              onClick={() => onSelectBranch(branch)}
+              className={`p-4 cursor-pointer border-b border-gray-100 last:border-b-0 transition-colors ${
+                selectedBranch?.id === branch.id
+                  ? 'bg-blue-50 border-l-4 border-l-blue-600'
+                  : 'hover:bg-gray-50 border-l-4 border-l-transparent'
+              }`}
+            >
+              {/* Branch Header */}
+              <div className="flex items-center gap-2 mb-2">
+                <span
+                  className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                    branch.type === 'Branch'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'bg-orange-100 text-orange-700'
+                  }`}
+                >
+                  {branch.type}
+                </span>
+              </div>
+
+              <div className="flex items-start gap-2">
+                <MapPin
+                  className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
+                    branch.type === 'Branch'
+                      ? 'text-blue-600'
+                      : 'text-orange-600'
+                  }`}
+                />
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-semibold text-gray-900 mb-1">
+                    {branch.name}
+                  </h4>
+
+                  <div className="space-y-1 text-sm text-gray-600">
+                    {/* Address */}
+                    <p>{branch.address}</p>
+
+                    {/* Distance */}
+                    {branch.distance && (
+                      <p className="text-xs text-gray-500">
+                        {branch.distance} ({branch.duration || '1 min'})
+                      </p>
+                    )}
+
+                    {/* Hours */}
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-gray-400" />
+                      <span>{branch.time}</span>
+                    </div>
+
+                    {/* Phone */}
+                    {branch.phone && branch.phone !== 'N/A' && (
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-4 h-4 text-gray-400" />
+                        <span>Phone Number: {branch.phone}</span>
+                      </div>
+                    )}
+
+                    {/* Fax */}
+                    {branch.fax && branch.fax !== 'N/A' && (
+                      <div className="flex items-center gap-2">
+                        <Printer className="w-4 h-4 text-gray-400" />
+                        <span>Fax Number: {branch.fax}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
