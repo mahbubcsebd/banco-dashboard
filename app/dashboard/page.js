@@ -1,8 +1,10 @@
 'use client';
 
 import AccountsGrid from '@/components/dashboard/AccountsGrid';
+import CorporateActions from '@/components/dashboard/CorporateActions';
 import QuickActions from '@/components/dashboard/QuickActions';
 import RecentTransactions from '@/components/dashboard/RecentTransactions';
+import UserGrid from '@/components/dashboard/UserGrid';
 import MobileNav from '@/components/layout/MobileNav';
 import { userData } from '@/data/mockData';
 import { motion } from 'framer-motion';
@@ -43,9 +45,17 @@ export default function Dashboard() {
           <div className="mb-6 md:mb-8">
             <QuickActions />
           </div>
+          {/* Corporate Actions */}
+          <div className="mb-6 md:mb-8">
+            <CorporateActions />
+          </div>
           {/* Accounts Section */}
           <div className="mb-6 md:mb-8">
             <AccountsGrid />
+          </div>
+          {/* Accounts Section */}
+          <div className="mb-6 md:mb-8">
+            <UserGrid />
           </div>
 
           {/* Recent Transactions */}

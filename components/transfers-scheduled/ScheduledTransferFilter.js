@@ -40,7 +40,7 @@ const ScheduledTransferFilter = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8 mx-auto"
+      className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8 max-w-4xl mx-auto"
     >
       <h3 className="text-xl font-semibold text-gray-900 mb-6">
         Upcoming Transfers

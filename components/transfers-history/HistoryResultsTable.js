@@ -92,7 +92,7 @@ const HistoryResultsTable = ({ data = [], isSearching = false }) => {
 
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center mx-auto">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center max-w-4xl mx-auto">
         <p className="text-gray-500">
           No transfers found matching your filters.
         </p>
@@ -105,7 +105,7 @@ const HistoryResultsTable = ({ data = [], isSearching = false }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="mx-auto"
+      className="mx-auto max-w-4xl"
     >
       <h3 className="text-xl font-semibold text-gray-900 mb-4">
         Transfer History

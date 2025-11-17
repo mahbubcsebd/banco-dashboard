@@ -2,9 +2,12 @@
 
 import HeaderTop from '@/components/global/HeaderTop';
 import TransferTable from '@/components/transfer-between-accounts/TransferTable';
-import TransferForm from '@/components/transfers-local-bank/TranferForm';
-// import TransferForm from '@/components/transfers-local-bank/TransferForm';
+import TransferToOtherForm from '@/components/transfers-local-bank/TranferForm';
 import { useState } from 'react';
+
+// 🌟 Import Modal Components 🌟
+import TransferToOtherConfirmationModal from '@/components/transfer-other-finxt/TransferToOtherConfirmationModal';
+import TransferToOtherSuccessModal from '@/components/transfer-other-finxt/TransferToOtherSuccessModal';
 
 // Mock data for recent transfers (unchanged)
 const recentTransfersData = [
@@ -17,62 +20,99 @@ const recentTransfersData = [
     amount: 123.45,
     status: 'SUCCESS',
   },
-  {
-    id: 2,
-    fromAccount: 'CHK 110001002321',
-    toAccount: 'SAV 210001002331',
-    date: '11/03/2025 05:53:32',
-    reference: 'Ref: 115091',
-    amount: 10.0,
-    status: 'SUCCESS',
-  },
-  {
-    id: 3,
-    fromAccount: 'CHK 110001002321',
-    toAccount: 'SAV 210001002331',
-    date: '10/29/2025 02:03:56',
-    reference: 'Ref: 835535',
-    amount: 10.0,
-    status: 'SUCCESS',
-  },
   // ... rest of the mock data
 ];
 
+// --- Mock Data Lookup Logic ---
+const simulateDataLookup = (formData) => {
+  const amountNum = Number(formData.amount) || 0;
+
+  // Mock fee calculation (assuming this is done server-side or via a service layer)
+  const commission = amountNum * 0.01;
+  const stamp = amountNum * 0.02;
+  const taxFee = 1.0;
+  const tca = 1.0;
+  const totalFees = commission + stamp + taxFee + tca;
+  const totalAmount = amountNum + totalFees;
+
+  // Mock lookup for labels (replace with real lookup based on selected IDs)
+  const fromAccountLabel = 'CURRENT 110001002321 USD 5,744.48';
+  const toAccountLabel = 'Local Bank Payee - ACCT 9876';
+
+  return {
+    ...formData,
+    amount: amountNum,
+    fromAccountLabel,
+    toAccountLabel,
+    commission,
+    stamp,
+    taxFee,
+    tca,
+    totalFees,
+    totalAmount, // Include fees
+  };
+};
+// ---------------------------------
+
 export default function TransferToOtherLocalBanks() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [transferData, setTransferData] = useState(null);
 
-  const handleTransferSubmit = async (formData) => {
+  // Step 1: Triggered by form submission (opens confirmation modal)
+  const handleFormSubmit = (formData) => {
+    const dataForModal = simulateDataLookup(formData);
+    setTransferData(dataForModal);
+    setIsConfirmModalOpen(true); // Open the confirmation modal
+  };
+
+  // Step 2: Triggered by confirmation modal (final API call)
+  const handleFinalSubmit = async (finalDataWithFees) => {
     setIsSubmitting(true);
+    setIsConfirmModalOpen(false);
 
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    console.log('Transfer submitted:', formData);
-    setIsSubmitting(false);
+    console.log('FINAL LOCAL BANK TRANSFER SUBMITTED:', finalDataWithFees);
 
-    // Show success message or handle error
+    setTransferData(finalDataWithFees); // Update data with final fees
+    setIsSubmitting(false);
+    setIsSuccessModalOpen(true); // Open the success modal
   };
 
   return (
-    <div className="">
-      {/* Main Content */}
-      <div className="">
-        <HeaderTop
-          title="Transfer To Other Local Banks" // Changed title
-          text="Easily transfer money to accounts of other local banks" // Changed text
-          link="/dashboard"
-          linkText="Back to Dashboard"
-        />
+    <div className="p-6">
+      {/* 🌟 1. Confirmation Modal (Rendered Here) 🌟 */}
+      <TransferToOtherConfirmationModal
+        isOpen={isConfirmModalOpen}
+        onClose={() => setIsConfirmModalOpen(false)}
+        transferData={transferData}
+        onConfirm={handleFinalSubmit}
+        isSubmitting={isSubmitting}
+      />
 
-        {/* Transfer Form (The form's content logic is updated below) */}
-        <TransferForm
-          onSubmit={handleTransferSubmit}
-          isSubmitting={isSubmitting}
-        />
+      {/* 🌟 2. Success Modal (Rendered Here) 🌟 */}
+      <TransferToOtherSuccessModal
+        isOpen={isSuccessModalOpen}
+        onClose={() => setIsSuccessModalOpen(false)}
+        transferData={transferData}
+      />
 
-        {/* Recent Transfers Table */}
-        <TransferTable data={recentTransfersData} />
-      </div>
+      <HeaderTop
+        title="Transfer To Other Local Banks"
+        text="Easily transfer money to accounts of other local banks"
+        link="/dashboard"
+        linkText="Back to Dashboard"
+      />
+
+      <TransferToOtherForm
+        onSubmit={handleFormSubmit}
+        isSubmitting={isSubmitting}
+      />
+
+      <TransferTable data={recentTransfersData} />
     </div>
   );
 }

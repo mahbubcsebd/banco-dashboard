@@ -1,38 +1,42 @@
 'use client';
 
 import HeaderTop from '@/components/global/HeaderTop';
-import TransferForm from '@/components/transfer-between-accounts/TransferForm';
-import TransferTable from '@/components/transfer-between-accounts/TransferTable';
-// Import new modals
-import TransferConfirmationModal from '@/components/transfer-between-accounts/TransferConfirmationModal';
-import TransferSuccessModal from '@/components/transfer-between-accounts/TransferSuccessModal';
-
+import TransferTable from '@/components/transfer-between-accounts/TransferTable'; // Reusing TransferTable
+import TransferToOtherConfirmationModal from '@/components/transfer-other-finxt/TransferToOtherConfirmationModal';
+import TransferToOtherForm from '@/components/transfer-other-finxt/TransferToOtherForm';
+import TransferToOtherSuccessModal from '@/components/transfer-other-finxt/TransferToOtherSuccessModal';
 import { useState } from 'react';
 
-// Mock data for recent transfers (unchanged)
+// Mock data (you can replace later with API data)
 const recentTransfersData = [
-  // ... your mock data ...
+  {
+    id: 1,
+    fromAccount: 'CHK 11000982321',
+    toAccount: 'Jaz',
+    date: '10/29/2025 09:23:56',
+    reference: 'Ref: 109103',
+    amount: 10.0,
+    status: 'SUCCESS',
+  },
 ];
 
-export default function TransferBetweenAccounts() {
+export default function TransferToOtherFinxactAccount() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-
-  // Data transferred between form, confirmation, and success
   const [transferData, setTransferData] = useState(null);
 
   // Step 1: Triggered by form submission (opens confirmation modal)
   const handleFormSubmit = (formData) => {
-    // Look up selected account labels for display in modal
-    const fromAccountLabel = 'SAV 210001002331 USD 4,489.33'; // Mock detail lookup
-    const toAccountLabel = 'SAV 210001002441 USD 6,713.01'; // Mock detail lookup
+    // Mock lookup for labels (replace with real lookup)
+    const fromAccountLabel = 'CURRENT 110001002321 USD 5,744.48';
+    const toAccountLabel = 'SAVINGS 210001002331 USD 6,733.01';
 
     setTransferData({
       ...formData,
+      amount: Number(formData.amount) || 0, // Ensure amount is number
       fromAccountLabel,
       toAccountLabel,
-      // Add start date and frequency logic here if scheduled
     });
     setIsConfirmModalOpen(true);
   };
@@ -42,19 +46,18 @@ export default function TransferBetweenAccounts() {
     setIsSubmitting(true);
     setIsConfirmModalOpen(false);
 
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     console.log('FINAL TRANSFER SUBMITTED:', finalDataWithFees);
 
-    setTransferData(finalDataWithFees); // Update data with final fees/conf number
+    setTransferData(finalDataWithFees);
     setIsSubmitting(false);
     setIsSuccessModalOpen(true);
   };
 
   return (
     <div className="p-6">
-      <TransferConfirmationModal
+      <TransferToOtherConfirmationModal
         isOpen={isConfirmModalOpen}
         onClose={() => setIsConfirmModalOpen(false)}
         transferData={transferData}
@@ -62,20 +65,23 @@ export default function TransferBetweenAccounts() {
         isSubmitting={isSubmitting}
       />
 
-      <TransferSuccessModal
+      <TransferToOtherSuccessModal
         isOpen={isSuccessModalOpen}
         onClose={() => setIsSuccessModalOpen(false)}
         transferData={transferData}
       />
 
       <HeaderTop
-        title="Transfer Between My Accounts At Finxact Bank"
-        text="Move money easily between your own accounts"
+        title="Transfer to Other Finxact Account"
+        text="Easily transfer money to accounts at other banks"
         link="/dashboard"
         linkText="Back to Dashboard"
       />
 
-      <TransferForm onSubmit={handleFormSubmit} isSubmitting={isSubmitting} />
+      <TransferToOtherForm
+        onSubmit={handleFormSubmit}
+        isSubmitting={isSubmitting}
+      />
 
       <TransferTable data={recentTransfersData} />
     </div>

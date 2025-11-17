@@ -98,7 +98,7 @@ const UpcomingTransfersTable = ({ data = [] }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="mx-auto" // Added for consistent centering
+        className="mx-auto max-w-4xl" // Added for consistent centering
       >
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
           <p className="text-gray-500">
@@ -114,7 +114,7 @@ const UpcomingTransfersTable = ({ data = [] }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="mx-auto" // Added for consistent centering
+      className="mx-auto max-w-4xl" // Added for consistent centering
     >
       {/* Desktop Table View */}
       <div className="hidden md:block bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
