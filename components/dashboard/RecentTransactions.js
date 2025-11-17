@@ -24,8 +24,8 @@ const columnHelper = createColumnHelper();
 
 const filterCategories = [
   { id: 'all', label: 'All' },
-  { id: 'between-accounts', label: 'Between my Accounts at Banco di Caribe' },
-  { id: 'to-banco', label: 'To Other Banco di Caribe Account' },
+  { id: 'between-accounts', label: 'Between my Accounts at Finxact' },
+  { id: 'to-banco', label: 'To Other Finxact Account' },
   { id: 'to-local', label: 'To Other Local Bank' },
   { id: 'loan', label: 'Loan Payment' },
   { id: 'send-money', label: 'Send Money' },
@@ -54,9 +54,9 @@ export default function RecentTransactions() {
         const category = transaction.category.toLowerCase();
         switch (activeFilter) {
           case 'between-accounts':
-            return category === 'between my accounts at banco di caribe';
+            return category === 'between my accounts at Finxact';
           case 'to-banco':
-            return category === 'to other banco di caribe account';
+            return category === 'to other Finxact account';
           case 'to-local':
             return category === 'to other local bank';
           case 'loan':

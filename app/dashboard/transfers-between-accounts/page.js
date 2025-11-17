@@ -122,7 +122,7 @@ export default function TransferBetweenAccounts() {
       {/* Main Content */}
       <div className="">
         <HeaderTop
-          title="Transfer Between My Accounts At Banco di Caribe"
+          title="Transfer Between My Accounts At Finxact"
           text="Move money easily between your own accounts"
           link="/dashboard"
           linkText="Back to Dashboard"

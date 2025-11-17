@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: 'Dashboard | Banco di Caribe',
+  title: 'Dashboard | Finxact',
   description: 'Manage your accounts and transactions',
 };
 

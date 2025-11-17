@@ -347,7 +347,7 @@ export const transactions = [
   {
     id: 1,
     description: 'Transfer between savings and current',
-    category: 'Between my Accounts at Banco di Caribe',
+    category: 'Between my Accounts at Finxact',
     accountNumber: '**********112',
     date: '2024-09-10 11:45:32',
     amount: 500.0,
@@ -356,7 +356,7 @@ export const transactions = [
   {
     id: 2,
     description: 'Transfer to Banco main account',
-    category: 'To Other Banco di Caribe Account',
+    category: 'To Other Finxact Account',
     accountNumber: '**********667',
     date: '2024-09-11 14:32:19',
     amount: -300.0,
@@ -401,7 +401,7 @@ export const transactions = [
   {
     id: 7,
     description: 'Interest received on savings account',
-    category: 'Between my Accounts at Banco di Caribe',
+    category: 'Between my Accounts at Finxact',
     accountNumber: '**********776',
     date: '2024-09-15 20:25:14',
     amount: 120.0,
@@ -419,7 +419,7 @@ export const transactions = [
   {
     id: 9,
     description: 'Salary received from employer',
-    category: 'To Other Banco di Caribe Account',
+    category: 'To Other Finxact Account',
     accountNumber: '**********122',
     date: '2024-09-17 18:03:58',
     amount: 25000.0,
@@ -446,7 +446,7 @@ export const transactions = [
   {
     id: 12,
     description: 'ATM withdrawal',
-    category: 'Between my Accounts at Banco di Caribe',
+    category: 'Between my Accounts at Finxact',
     accountNumber: '**********458',
     date: '2024-09-19 14:40:02',
     amount: -3000.0,
@@ -473,7 +473,7 @@ export const transactions = [
   {
     id: 15,
     description: 'Received from customer',
-    category: 'To Other Banco di Caribe Account',
+    category: 'To Other Finxact Account',
     accountNumber: '**********911',
     date: '2024-09-21 19:55:12',
     amount: 820.0,
@@ -492,6 +492,31 @@ export const sidebarMenuItems = [
     ],
   },
   {
+    section: 'ADMINISTRATION',
+    items: [
+      {
+        id: 'user-administration',
+        label: 'User Administration',
+        icon: 'users',
+        submenu: [
+          { id: 'manage-users', label: 'Manage Users' },
+          { id: 'company-information', label: 'Company Information' },
+          { id: 'manage-otp', label: 'Manage OTP Mobile numbers' },
+        ],
+      },
+      {
+        id: 'payroll-management',
+        label: 'Payroll Management',
+        icon: 'document',
+      },
+      {
+        id: 'transactions-approvals',
+        label: 'Transactions Approvals Parameters',
+        icon: 'documentText',
+      },
+    ],
+  },
+  {
     section: 'PAYMENTS & TRANSFERS',
     items: [
       {
@@ -501,11 +526,11 @@ export const sidebarMenuItems = [
         submenu: [
           {
             id: 'transfers-between-accounts',
-            label: 'Between my Accounts At MCB Bank',
+            label: 'Between my Accounts At Finxact Bank',
           },
           {
-            id: 'transfers-other-mcb',
-            label: 'Transfer to Other MCB Bank Account',
+            id: 'transfers-other-finxact',
+            label: 'Transfer to Other Finxact Bank Account',
           },
           { id: 'transfers-local-bank', label: 'Transfer to Other Local Bank' },
           { id: 'transfers-history', label: 'Transfer History' },

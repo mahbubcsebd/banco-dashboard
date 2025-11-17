@@ -18,7 +18,7 @@ const accountTypeOptions = [
 ];
 
 const bankOptions = [
-  { value: 'BancoDiCaribe', label: 'Banco di Caribe N.V. (Curacao)' },
+  { value: 'BancoDiCaribe', label: 'Finxact N.V. (Curacao)' },
   { value: 'OtherLocalBank', label: 'Local Bank X' },
 ];
 

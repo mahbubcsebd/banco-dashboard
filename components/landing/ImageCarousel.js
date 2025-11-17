@@ -12,7 +12,7 @@ const ImageCarousel = ({ images = [] }) => {
 
   if (images.length === 1) {
     return (
-      <div className="relative w-full bg-white rounded-2xl overflow-hidden shadow-sm">
+      <div className="relative w-full bg-white rounded-md verflow-hidden shadow-sm">
         <div className="relative w-full aspect-16/7">
           <Image
             src={images[0].src}
@@ -43,7 +43,7 @@ const ImageCarousel = ({ images = [] }) => {
           disableOnInteraction: false,
         }}
         loop={true}
-        className="aspect-[16/7]"
+        className="aspect-16/7"
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>

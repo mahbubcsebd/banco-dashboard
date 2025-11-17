@@ -4,7 +4,7 @@ import ActionCard from './ActionCard';
 
 const ActionGrid = ({ actions = [] }) => {
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-3">
       {actions.map((action, index) => (
         <ActionCard
           key={index}

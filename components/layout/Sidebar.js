@@ -271,7 +271,7 @@ export default function Sidebar({
                   />
                 </div>
                 <span className="font-semibold text-sm text-orange-500">
-                  BANCO DI CARIBE
+                  Finxact
                 </span>
               </Link>
 
@@ -302,7 +302,7 @@ export default function Sidebar({
 
             {/* Footer */}
             <div className="border-t border-gray-200 p-4 text-xs text-gray-500">
-              © 2025 Banco di Caribe.
+              © 2025 Finxact.
             </div>
           </motion.aside>
         )}
@@ -337,7 +337,7 @@ export default function Sidebar({
                 />
               </div>
               <span className="font-semibold text-sm text-orange-500">
-                BANCO DI CARIBE
+                Finxact
               </span>
             </Link>
           ) : (
@@ -384,7 +384,7 @@ export default function Sidebar({
 
         {/* Footer */}
         <div className="border-t border-gray-200 p-4 text-xs text-gray-500">
-          {!isCollapsed ? '© 2025 Banco di Caribe.' : '©'}
+          {!isCollapsed ? '© 2025 Finxact.' : '©'}
         </div>
       </motion.aside>
     </>

@@ -152,7 +152,7 @@ const TransferForm = ({ onSubmit, isSubmitting = false }) => {
           </div>
         </div>
         {/* Transfer Type Buttons - Styled to look like the image's "Immediate/Scheduled" buttons */}
-        <div className="flex justify-end gap-2 p-1 border border-gray-300 rounded-md bg-gray-50">
+        {/* <div className="flex justify-end gap-2 p-1 border border-gray-300 rounded-md bg-gray-50">
           {transferTypeOptions.map((option) => (
             <button
               key={option.value}
@@ -168,7 +168,7 @@ const TransferForm = ({ onSubmit, isSubmitting = false }) => {
               {option.label}
             </button>
           ))}
-        </div>
+        </div> */}
 
         <GlobalInput
           label="Description"
