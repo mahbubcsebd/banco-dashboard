@@ -95,7 +95,7 @@ const allUsers = [
   },
 ];
 
-export default function FinalUserGrid() {
+export default function UserGrid() {
   const [isMobile, setIsMobile] = useState(false);
 
   // Modal states
@@ -258,38 +258,32 @@ export default function FinalUserGrid() {
         )}
       </div>
 
-      {/* Modals */}
-      <AnimatePresence mode="wait">
-        {showDeleteModal && selectedUser && (
-          <DeleteUserModal
-            user={selectedUser}
-            onClose={() => setShowDeleteModal(false)}
-            onSubmit={handleDeleteSubmit}
-          />
-        )}
+      {/* Modals - Updated with isOpen prop pattern */}
+      <DeleteUserModal
+        isOpen={showDeleteModal && !!selectedUser}
+        user={selectedUser || {}}
+        onClose={() => setShowDeleteModal(false)}
+        onSubmit={handleDeleteSubmit}
+      />
 
-        {showResetModal && (
-          <ResetPasswordModal
-            onClose={() => setShowResetModal(false)}
-            onConfirm={handleResetPasswordConfirm}
-          />
-        )}
+      <ResetPasswordModal
+        isOpen={showResetModal}
+        onClose={() => setShowResetModal(false)}
+        onConfirm={handleResetPasswordConfirm}
+      />
 
-        {showDeactivateModal && (
-          <DeactivateUserModal
-            onClose={() => setShowDeactivateModal(false)}
-            onConfirm={handleDeactivateConfirm}
-          />
-        )}
+      <DeactivateUserModal
+        isOpen={showDeactivateModal}
+        onClose={() => setShowDeactivateModal(false)}
+        onConfirm={handleDeactivateConfirm}
+      />
 
-        {showSuccessModal && (
-          <SuccessModal
-            onClose={() => setShowSuccessModal(false)}
-            confirmationNumber={successData.confirmationNumber}
-            message={successData.message}
-          />
-        )}
-      </AnimatePresence>
+      <SuccessModal
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        confirmationNumber={successData.confirmationNumber}
+        message={successData.message}
+      />
     </div>
   );
 }

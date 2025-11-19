@@ -1,14 +1,12 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Search, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Pagination as SwiperPagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { Pagination as SwiperPagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import UserCard from '@/components/dashboard/UserCard';
 import {
@@ -20,7 +18,6 @@ import {
 import Link from 'next/link';
 import Button from '../login/Button';
 
-// Mock data - 100+ users
 const generateMockUsers = () => {
   const roles = ['owner', 'approver', 'entry'];
   const firstNames = [
@@ -85,17 +82,14 @@ const generateMockUsers = () => {
 };
 
 const allUsers = generateMockUsers();
-
 const ITEMS_PER_PAGE = 12;
 
-const UserList = () => {
+export default function UserList() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRole, setSelectedRole] = useState('all');
-  const [showFilters, setShowFilters] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Modal states
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
   const [showDeactivateModal, setShowDeactivateModal] = useState(false);
@@ -106,7 +100,6 @@ const UserList = () => {
     message: '',
   });
 
-  // Check if mobile
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -114,7 +107,6 @@ const UserList = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Filter users
   const filteredUsers = allUsers.filter((user) => {
     const matchesSearch =
       user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -124,13 +116,11 @@ const UserList = () => {
     return matchesSearch && matchesRole;
   });
 
-  // Pagination calculation
   const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentUsers = filteredUsers.slice(startIndex, endIndex);
 
-  // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery, selectedRole]);
@@ -181,15 +171,12 @@ const UserList = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Pagination buttons array
   const getPageNumbers = () => {
     const pages = [];
     const maxVisible = 5;
 
     if (totalPages <= maxVisible) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
     } else {
       if (currentPage <= 3) {
         for (let i = 1; i <= 4; i++) pages.push(i);
@@ -226,65 +213,51 @@ const UserList = () => {
             </Button>
           </Link>
         </div>
-        {/* Filters */}
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
-            <div className="bg-white rounded-xl border border-gray-200 p-4 space-y-3">
-              {/* Search */}
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search users..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-10 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all duration-200"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
 
-              {/* Role Filter Buttons */}
-              <div className="flex flex-wrap gap-2">
-                {['all', 'owner', 'approver', 'entry'].map((role) => (
-                  <button
-                    key={role}
-                    onClick={() => setSelectedRole(role)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
-                      selectedRole === role
-                        ? 'bg-orange-500 text-white shadow-sm'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                    }`}
-                  >
-                    {role === 'all'
-                      ? 'All'
-                      : role.charAt(0).toUpperCase() + role.slice(1)}
-                  </button>
-                ))}
-              </div>
+        <div className="bg-white rounded-xl border border-gray-200 p-4 space-y-3">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search users..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-9 pr-10 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
 
-              {/* Results Info */}
-              <div className="text-xs text-gray-600 pt-2 border-t border-gray-100">
-                Showing {filteredUsers.length} user
-                {filteredUsers.length !== 1 ? 's' : ''}
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+          <div className="flex flex-wrap gap-2">
+            {['all', 'owner', 'approver', 'entry'].map((role) => (
+              <button
+                key={role}
+                onClick={() => setSelectedRole(role)}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium ${
+                  selectedRole === role
+                    ? 'bg-orange-500 text-white shadow-sm'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                {role === 'all'
+                  ? 'All'
+                  : role.charAt(0).toUpperCase() + role.slice(1)}
+              </button>
+            ))}
+          </div>
 
-        {/* Users Grid - Desktop & Tablet */}
+          <div className="text-xs text-gray-600 pt-2 border-t border-gray-100">
+            Showing {filteredUsers.length} user
+            {filteredUsers.length !== 1 ? 's' : ''}
+          </div>
+        </div>
+
         {!isMobile && (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             {currentUsers.length > 0 ? (
@@ -316,7 +289,6 @@ const UserList = () => {
           </div>
         )}
 
-        {/* Mobile Swiper */}
         {isMobile && currentUsers.length > 0 && (
           <div className="mobile-swiper-container bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <Swiper
@@ -346,21 +318,16 @@ const UserList = () => {
               .mobile-swiper-container .swiper {
                 padding-bottom: 0;
               }
-
               .mobile-swiper-container .swiper-pagination {
                 position: relative !important;
                 bottom: auto !important;
                 margin-top: 20px;
               }
-
               .mobile-swiper-container .swiper-pagination-bullet {
                 width: 8px;
                 height: 8px;
                 background: #d1d5db;
-                opacity: 1;
-                transition: all 0.3s ease;
               }
-
               .mobile-swiper-container .swiper-pagination-bullet-active {
                 width: 32px;
                 border-radius: 4px;
@@ -370,15 +337,13 @@ const UserList = () => {
           </div>
         )}
 
-        {/* Pagination */}
         {filteredUsers.length > ITEMS_PER_PAGE && (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              {/* Previous Button */}
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${
                   currentPage === 1
                     ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                     : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
@@ -388,7 +353,6 @@ const UserList = () => {
                 Previous
               </button>
 
-              {/* Page Numbers */}
               <div className="flex items-center gap-1 flex-wrap justify-center">
                 {getPageNumbers().map((page, index) => (
                   <button
@@ -397,7 +361,7 @@ const UserList = () => {
                       typeof page === 'number' && handlePageChange(page)
                     }
                     disabled={page === '...'}
-                    className={`min-w-[40px] h-10 rounded-lg text-sm font-medium transition-all ${
+                    className={`min-w-10 h-10 rounded-lg text-sm font-medium ${
                       page === currentPage
                         ? 'bg-orange-600 text-white shadow-md'
                         : page === '...'
@@ -410,11 +374,10 @@ const UserList = () => {
                 ))}
               </div>
 
-              {/* Next Button */}
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${
                   currentPage === totalPages
                     ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                     : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
@@ -428,40 +391,31 @@ const UserList = () => {
         )}
       </div>
 
-      {/* Modals */}
-      <AnimatePresence mode="wait">
-        {showDeleteModal && selectedUser && (
-          <DeleteUserModal
-            user={selectedUser}
-            onClose={() => setShowDeleteModal(false)}
-            onSubmit={handleDeleteSubmit}
-          />
-        )}
+      <DeleteUserModal
+        isOpen={showDeleteModal && !!selectedUser}
+        user={selectedUser || {}}
+        onClose={() => setShowDeleteModal(false)}
+        onSubmit={handleDeleteSubmit}
+      />
 
-        {showResetModal && (
-          <ResetPasswordModal
-            onClose={() => setShowResetModal(false)}
-            onConfirm={handleResetPasswordConfirm}
-          />
-        )}
+      <ResetPasswordModal
+        isOpen={showResetModal}
+        onClose={() => setShowResetModal(false)}
+        onConfirm={handleResetPasswordConfirm}
+      />
 
-        {showDeactivateModal && (
-          <DeactivateUserModal
-            onClose={() => setShowDeactivateModal(false)}
-            onConfirm={handleDeactivateConfirm}
-          />
-        )}
+      <DeactivateUserModal
+        isOpen={showDeactivateModal}
+        onClose={() => setShowDeactivateModal(false)}
+        onConfirm={handleDeactivateConfirm}
+      />
 
-        {showSuccessModal && (
-          <SuccessModal
-            onClose={() => setShowSuccessModal(false)}
-            confirmationNumber={successData.confirmationNumber}
-            message={successData.message}
-          />
-        )}
-      </AnimatePresence>
+      <SuccessModal
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        confirmationNumber={successData.confirmationNumber}
+        message={successData.message}
+      />
     </div>
   );
-};
-
-export default UserList;
+}
