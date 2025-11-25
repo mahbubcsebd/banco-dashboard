@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Chrome, Mail, Monitor, Phone, Smartphone } from 'lucide-react';
+import Link from 'next/link';
 
 const PrivacyPolicy = () => {
   return (
@@ -291,12 +292,12 @@ const PrivacyPolicy = () => {
                 You have the right to withdraw your given consent for the
                 collection of specific personal data. You can do by sending an
                 email to our Member Service Center at{' '}
-                <a
+                <Link
                   href="mailto:info@finxact.com"
                   className="text-orange-500 hover:text-orange-600 font-medium"
                 >
                   info@finxact.com
-                </a>
+                </Link>
               </li>
               <li>
                 You have the right to request the reason(s) why your personal
@@ -445,12 +446,12 @@ const PrivacyPolicy = () => {
                   <p className="text-sm font-medium text-gray-900 mb-1">
                     Email
                   </p>
-                  <a
+                  <Link
                     href="mailto:info@finxact.com"
                     className="text-orange-500 hover:text-orange-600 font-medium"
                   >
                     info@finxact.com
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -460,12 +461,12 @@ const PrivacyPolicy = () => {
                   <p className="text-sm font-medium text-gray-900 mb-1">
                     Phone
                   </p>
-                  <a
+                  <Link
                     href="tel:+8668346922"
                     className="text-blue-500 hover:text-blue-600 font-medium"
                   >
                     +(866) 834-6922
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

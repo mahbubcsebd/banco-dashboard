@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { useState } from 'react';
 
 const faqData = [
@@ -190,12 +191,12 @@ const FAQSection = () => {
           <p className="text-sm sm:text-base text-gray-600 mb-4">
             Still have questions?
           </p>
-          <a
+          <Link
             href="/contact"
             className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-orange-500 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
           >
             Contact Support
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

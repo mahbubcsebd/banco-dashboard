@@ -8,6 +8,7 @@ import TransactionCard from '@/components/account-details/TransactionCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { accountStatements } from '@/data/mockData';
 import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -17,7 +18,10 @@ const AccountDetailsClient = ({ account }) => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredTransactions = account.transactions.filter((transaction) =>
+  const transactions = account?.transactions || [];
+  const statements = accountStatements[account.accountNumber] || [];
+
+  const filteredTransactions = transactions.filter((transaction) =>
     transaction.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -68,13 +72,21 @@ const AccountDetailsClient = ({ account }) => {
                 </h3>
               </div>
               <div className="space-y-2">
-                {account.transactions.slice(0, 5).map((transaction, index) => (
-                  <TransactionCard
-                    key={transaction.id}
-                    transaction={transaction}
-                    index={index}
-                  />
-                ))}
+                {transactions.length > 0 ? (
+                  transactions
+                    .slice(0, 5)
+                    .map((transaction, index) => (
+                      <TransactionCard
+                        key={transaction.id}
+                        transaction={transaction}
+                        index={index}
+                      />
+                    ))
+                ) : (
+                  <p className="text-sm text-gray-500">
+                    No recent transactions.
+                  </p>
+                )}
               </div>
               <Button
                 variant="ghost"
@@ -92,7 +104,6 @@ const AccountDetailsClient = ({ account }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Search */}
               <div className="relative mb-4">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <Input
@@ -104,7 +115,6 @@ const AccountDetailsClient = ({ account }) => {
                 />
               </div>
 
-              {/* Transactions List */}
               <div className="space-y-2">
                 {filteredTransactions.length > 0 ? (
                   filteredTransactions.map((transaction, index) => (
@@ -134,13 +144,19 @@ const AccountDetailsClient = ({ account }) => {
                 Account Statements
               </h3>
               <div className="space-y-2">
-                {account.statements.map((statement, index) => (
-                  <StatementCard
-                    key={statement.month}
-                    statement={statement}
-                    index={index}
-                  />
-                ))}
+                {statements.length > 0 ? (
+                  statements.map((statement, index) => (
+                    <StatementCard
+                      key={index}
+                      statement={statement}
+                      index={index}
+                    />
+                  ))
+                ) : (
+                  <div className="text-center py-12 text-gray-500 bg-white rounded-xl border border-gray-200">
+                    <p>No statements available for this account.</p>
+                  </div>
+                )}
               </div>
             </motion.div>
           </TabsContent>
@@ -163,7 +179,6 @@ const AccountDetailsClient = ({ account }) => {
         </Tabs>
       </div>
 
-      {/* Bottom Spacing */}
       <div className="h-8" />
     </div>
   );

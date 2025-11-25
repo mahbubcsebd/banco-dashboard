@@ -63,7 +63,7 @@ const ActionCard = ({ action, index }) => {
         {/* Icon container */}
         <div className="">
           <action.icon
-            className="w-6 h-6 sm:w-7 sm:h-7 text-orange-500 group-hover:text-white transition-colors duration-300"
+            className="w-6 h-6 sm:w-7 sm:h-7 text-orange-500 transition-colors duration-300"
             strokeWidth={2}
           />
         </div>
