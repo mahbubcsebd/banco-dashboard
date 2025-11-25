@@ -6,147 +6,162 @@ import { useRouter } from 'next/navigation';
 
 const colorMap = {
   blue: {
-    gradient: 'bg-gradient-to-br from-blue-500 to-blue-600',
-    iconBg: 'bg-blue-600/20',
-    iconHover: 'hover:bg-blue-600/30',
-    border: 'border-blue-500',
-    leftBorder: 'border-l-blue-500',
-    circleBg: 'from-blue-500 to-blue-600',
+    gradient: 'bg-gradient-to-br from-blue-400 to-blue-500 backdrop-blur-xl',
+    iconBg: 'bg-blue-500/15 backdrop-blur-md',
+    iconHover: 'hover:bg-blue-500/25',
+    border: 'border-blue-400',
+    leftBorder: 'border-l-blue-400',
+    circleBg: 'from-blue-400 to-blue-500',
     lightBg: 'bg-blue-50',
-    curveGradient: 'bg-[linear-gradient(135deg,#3B82F6_0%,#2563EB_100%)]',
-    actionBg: 'bg-blue-100/90',
-    actionHover: 'hover:bg-blue-200/90',
-    actionIcon: 'text-blue-700',
+    curveGradient:
+      'bg-[linear-gradient(135deg,rgba(59,130,246,0.7)_0%,rgba(37,99,235,0.7)_100%)]',
+    actionBg: 'bg-blue-50/80 backdrop-blur-md',
+    actionHover: 'hover:bg-blue-100/80',
+    actionIcon: 'text-blue-600',
   },
   green: {
-    gradient: 'bg-gradient-to-br from-green-500 to-green-600',
-    iconBg: 'bg-green-600/20',
-    iconHover: 'hover:bg-green-600/30',
-    border: 'border-green-500',
-    leftBorder: 'border-l-green-500',
-    circleBg: 'from-green-500 to-green-600',
+    gradient: 'bg-gradient-to-br from-green-400 to-green-500 backdrop-blur-xl',
+    iconBg: 'bg-green-500/15 backdrop-blur-md',
+    iconHover: 'hover:bg-green-500/25',
+    border: 'border-green-400',
+    leftBorder: 'border-l-green-400',
+    circleBg: 'from-green-400 to-green-500',
     lightBg: 'bg-green-50',
-    curveGradient: 'bg-[linear-gradient(135deg,#10B981_0%,#059669_100%)]',
-    actionBg: 'bg-green-100/90',
-    actionHover: 'hover:bg-green-200/90',
-    actionIcon: 'text-green-700',
+    curveGradient:
+      'bg-[linear-gradient(135deg,rgba(16,185,129,0.7)_0%,rgba(5,150,105,0.7)_100%)]',
+    actionBg: 'bg-green-50/80 backdrop-blur-md',
+    actionHover: 'hover:bg-green-100/80',
+    actionIcon: 'text-green-600',
   },
   teal: {
-    gradient: 'bg-gradient-to-br from-teal-500 to-teal-600',
-    iconBg: 'bg-teal-600/20',
-    iconHover: 'hover:bg-teal-600/30',
-    border: 'border-teal-500',
-    leftBorder: 'border-l-teal-500',
-    circleBg: 'from-teal-500 to-teal-600',
+    gradient: 'bg-gradient-to-br from-teal-400 to-teal-500 backdrop-blur-xl',
+    iconBg: 'bg-teal-500/15 backdrop-blur-md',
+    iconHover: 'hover:bg-teal-500/25',
+    border: 'border-teal-400',
+    leftBorder: 'border-l-teal-400',
+    circleBg: 'from-teal-400 to-teal-500',
     lightBg: 'bg-teal-50',
-    curveGradient: 'bg-[linear-gradient(135deg,#14B8A6_0%,#0D9488_100%)]',
-    actionBg: 'bg-teal-100/90',
-    actionHover: 'hover:bg-teal-200/90',
-    actionIcon: 'text-teal-700',
+    curveGradient:
+      'bg-[linear-gradient(135deg,rgba(20,184,166,0.7)_0%,rgba(13,148,136,0.7)_100%)]',
+    actionBg: 'bg-teal-50/80 backdrop-blur-md',
+    actionHover: 'hover:bg-teal-100/80',
+    actionIcon: 'text-teal-600',
   },
   purple: {
-    gradient: 'bg-gradient-to-br from-purple-500 to-purple-600',
-    iconBg: 'bg-purple-600/20',
-    iconHover: 'hover:bg-purple-600/30',
-    border: 'border-purple-500',
-    leftBorder: 'border-l-purple-500',
-    circleBg: 'from-purple-500 to-purple-600',
+    gradient:
+      'bg-gradient-to-br from-purple-400 to-purple-500 backdrop-blur-xl',
+    iconBg: 'bg-purple-500/15 backdrop-blur-md',
+    iconHover: 'hover:bg-purple-500/25',
+    border: 'border-purple-400',
+    leftBorder: 'border-l-purple-400',
+    circleBg: 'from-purple-400 to-purple-500',
     lightBg: 'bg-purple-50',
-    curveGradient: 'bg-[linear-gradient(135deg,#A855F7_0%,#9333EA_100%)]',
-    actionBg: 'bg-purple-100/90',
-    actionHover: 'hover:bg-purple-200/90',
-    actionIcon: 'text-purple-700',
+    curveGradient:
+      'bg-[linear-gradient(135deg,rgba(168,85,247,0.7)_0%,rgba(147,51,234,0.7)_100%)]',
+    actionBg: 'bg-purple-50/80 backdrop-blur-md',
+    actionHover: 'hover:bg-purple-100/80',
+    actionIcon: 'text-purple-600',
   },
   red: {
-    gradient: 'bg-gradient-to-br from-red-500 to-red-600',
-    iconBg: 'bg-red-600/20',
-    iconHover: 'hover:bg-red-600/30',
-    border: 'border-red-500',
-    leftBorder: 'border-l-red-500',
-    circleBg: 'from-red-500 to-red-600',
+    gradient: 'bg-gradient-to-br from-red-400 to-red-500 backdrop-blur-xl',
+    iconBg: 'bg-red-500/15 backdrop-blur-md',
+    iconHover: 'hover:bg-red-500/25',
+    border: 'border-red-400',
+    leftBorder: 'border-l-red-400',
+    circleBg: 'from-red-400 to-red-500',
     lightBg: 'bg-red-50',
-    curveGradient: 'bg-[linear-gradient(135deg,#EF4444_0%,#DC2626_100%)]',
-    actionBg: 'bg-red-100/90',
-    actionHover: 'hover:bg-red-200/90',
-    actionIcon: 'text-red-700',
+    curveGradient:
+      'bg-[linear-gradient(135deg,rgba(239,68,68,0.7)_0%,rgba(220,38,38,0.7)_100%)]',
+    actionBg: 'bg-red-50/80 backdrop-blur-md',
+    actionHover: 'hover:bg-red-100/80',
+    actionIcon: 'text-red-600',
   },
   navy: {
-    gradient: 'bg-gradient-to-br from-slate-700 to-slate-800',
-    iconBg: 'bg-slate-600/20',
-    iconHover: 'hover:bg-slate-600/30',
-    border: 'border-slate-700',
-    leftBorder: 'border-l-slate-700',
-    circleBg: 'from-slate-700 to-slate-800',
+    gradient:
+      'bg-gradient-to-br from-slate-600/80 to-slate-700/80 backdrop-blur-xl',
+    iconBg: 'bg-slate-500/15 backdrop-blur-md',
+    iconHover: 'hover:bg-slate-500/25',
+    border: 'border-slate-600',
+    leftBorder: 'border-l-slate-600',
+    circleBg: 'from-slate-600/80 to-slate-700/80',
     lightBg: 'bg-slate-50',
-    curveGradient: 'bg-[linear-gradient(135deg,#334155_0%,#1E293B_100%)]',
-    actionBg: 'bg-slate-200/90',
-    actionHover: 'hover:bg-slate-300/90',
-    actionIcon: 'text-slate-800',
+    curveGradient:
+      'bg-[linear-gradient(135deg,rgba(51,65,85,0.7)_0%,rgba(30,41,59,0.7)_100%)]',
+    actionBg: 'bg-slate-100/80 backdrop-blur-md',
+    actionHover: 'hover:bg-slate-200/80',
+    actionIcon: 'text-slate-700',
   },
   slate: {
-    gradient: 'bg-gradient-to-br from-slate-500 to-slate-600',
-    iconBg: 'bg-slate-600/20',
-    iconHover: 'hover:bg-slate-600/30',
-    border: 'border-slate-500',
-    leftBorder: 'border-l-slate-500',
-    circleBg: 'from-slate-500 to-slate-600',
+    gradient: 'bg-gradient-to-br from-slate-400 to-slate-500 backdrop-blur-xl',
+    iconBg: 'bg-slate-500/15 backdrop-blur-md',
+    iconHover: 'hover:bg-slate-500/25',
+    border: 'border-slate-400',
+    leftBorder: 'border-l-slate-400',
+    circleBg: 'from-slate-400 to-slate-500',
     lightBg: 'bg-slate-50',
-    curveGradient: 'bg-[linear-gradient(135deg,#64748B_0%,#475569_100%)]',
-    actionBg: 'bg-slate-200/90',
-    actionHover: 'hover:bg-slate-300/90',
-    actionIcon: 'text-slate-800',
+    curveGradient:
+      'bg-[linear-gradient(135deg,rgba(100,116,139,0.7)_0%,rgba(71,85,105,0.7)_100%)]',
+    actionBg: 'bg-slate-100/80 backdrop-blur-md',
+    actionHover: 'hover:bg-slate-200/80',
+    actionIcon: 'text-slate-700',
   },
   amber: {
-    gradient: 'bg-gradient-to-br from-amber-500 to-amber-600',
-    iconBg: 'bg-amber-600/20',
-    iconHover: 'hover:bg-amber-600/30',
-    border: 'border-amber-500',
-    leftBorder: 'border-l-amber-500',
-    circleBg: 'from-amber-500 to-amber-600',
+    gradient: 'bg-gradient-to-br from-amber-400 to-amber-500 backdrop-blur-xl',
+    iconBg: 'bg-amber-500/15 backdrop-blur-md',
+    iconHover: 'hover:bg-amber-500/25',
+    border: 'border-amber-400',
+    leftBorder: 'border-l-amber-400',
+    circleBg: 'from-amber-400 to-amber-500',
     lightBg: 'bg-amber-50',
-    curveGradient: 'bg-[linear-gradient(135deg,#F59E0B_0%,#D97706_100%)]',
-    actionBg: 'bg-amber-100/90',
-    actionHover: 'hover:bg-amber-200/90',
-    actionIcon: 'text-amber-700',
+    curveGradient:
+      'bg-[linear-gradient(135deg,rgba(245,158,11,0.7)_0%,rgba(217,119,6,0.7)_100%)]',
+    actionBg: 'bg-amber-50/80 backdrop-blur-md',
+    actionHover: 'hover:bg-amber-100/80',
+    actionIcon: 'text-amber-600',
   },
   indigo: {
-    gradient: 'bg-gradient-to-br from-indigo-500 to-indigo-600',
-    iconBg: 'bg-indigo-600/20',
-    iconHover: 'hover:bg-indigo-600/30',
-    border: 'border-indigo-500',
-    leftBorder: 'border-l-indigo-500',
-    circleBg: 'from-indigo-500 to-indigo-600',
+    gradient:
+      'bg-gradient-to-br from-indigo-400 to-indigo-500 backdrop-blur-xl',
+    iconBg: 'bg-indigo-500/15 backdrop-blur-md',
+    iconHover: 'hover:bg-indigo-500/25',
+    border: 'border-indigo-400',
+    leftBorder: 'border-l-indigo-400',
+    circleBg: 'from-indigo-400 to-indigo-500',
     lightBg: 'bg-indigo-50',
-    curveGradient: 'bg-[linear-gradient(135deg,#6366F1_0%,#4F46E5_100%)]',
-    actionBg: 'bg-indigo-100/90',
-    actionHover: 'hover:bg-indigo-200/90',
-    actionIcon: 'text-indigo-700',
+    curveGradient:
+      'bg-[linear-gradient(135deg,rgba(99,102,241,0.7)_0%,rgba(79,70,229,0.7)_100%)]',
+    actionBg: 'bg-indigo-50/80 backdrop-blur-md',
+    actionHover: 'hover:bg-indigo-100/80',
+    actionIcon: 'text-indigo-600',
   },
   sky: {
-    gradient: 'bg-gradient-to-br from-sky-400 to-sky-500',
-    iconBg: 'bg-sky-600/20',
-    iconHover: 'hover:bg-sky-600/30',
-    border: 'border-sky-400',
-    leftBorder: 'border-l-sky-400',
-    circleBg: 'from-sky-400 to-sky-500',
+    gradient: 'bg-gradient-to-br from-sky-300/80 to-sky-400 backdrop-blur-xl',
+    iconBg: 'bg-sky-500/15 backdrop-blur-md',
+    iconHover: 'hover:bg-sky-500/25',
+    border: 'border-sky-300',
+    leftBorder: 'border-l-sky-300',
+    circleBg: 'from-sky-300/80 to-sky-400',
     lightBg: 'bg-sky-50',
-    curveGradient: 'bg-[linear-gradient(135deg,#38BDF8_0%,#0EA5E9_100%)]',
-    actionBg: 'bg-sky-100/90',
-    actionHover: 'hover:bg-sky-200/90',
-    actionIcon: 'text-sky-700',
+    curveGradient:
+      'bg-[linear-gradient(135deg,rgba(56,189,248,0.7)_0%,rgba(14,165,233,0.7)_100%)]',
+    actionBg: 'bg-sky-50/80 backdrop-blur-md',
+    actionHover: 'hover:bg-sky-100/80',
+    actionIcon: 'text-sky-600',
   },
   orange: {
-    gradient: 'bg-gradient-to-br from-orange-400 to-orange-500',
-    iconBg: 'bg-orange-600/20',
-    iconHover: 'hover:bg-orange-600/30',
-    border: 'border-orange-500',
-    leftBorder: 'border-l-orange-500',
-    circleBg: 'from-orange-400 to-orange-500',
+    gradient:
+      'bg-gradient-to-br from-orange-300/80 to-orange-400 backdrop-blur-xl',
+    iconBg: 'bg-orange-500/15 backdrop-blur-md',
+    iconHover: 'hover:bg-orange-500/25',
+    border: 'border-orange-300',
+    leftBorder: 'border-l-orange-300',
+    circleBg: 'from-orange-300/80 to-orange-400',
     lightBg: 'bg-orange-50',
-    curveGradient: 'bg-[linear-gradient(135deg,#FB923C_0%,#F97316_100%)]',
-    actionBg: 'bg-orange-100/90',
-    actionHover: 'hover:bg-orange-200/90',
-    actionIcon: 'text-orange-700',
+    curveGradient:
+      'bg-[linear-gradient(135deg,rgba(251,146,60,0.7)_0%,rgba(249,115,22,0.7)_100%)]',
+    actionBg: 'bg-orange-50/80 backdrop-blur-md',
+    actionHover: 'hover:bg-orange-100/80',
+    actionIcon: 'text-orange-600',
   },
 };
 
@@ -180,7 +195,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
     router.push(`/accounts/${account.accountNumber}`);
   };
 
-  // Grid View (No changes)
+  // Grid View
   if (viewMode === 'grid') {
     return (
       <motion.div
@@ -188,7 +203,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.1, duration: 0.3 }}
         whileHover={{ y: -4 }}
-        className={`${colors.gradient} rounded-lg p-5 md:p-6 text-white relative overflow-hidden shadow-lg`}
+        className={`${colors.gradient} rounded-lg p-5 md:p-6 text-white relative overflow-hidden shadow-lg border border-white/20`}
       >
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -210,7 +225,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
             >
               <button
                 onClick={handleViewAccount}
-                className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+                className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors backdrop-blur-sm"
               >
                 <Eye className="w-3.5 h-3.5" />
               </button>
@@ -227,13 +242,13 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
             <p className="text-[10px] opacity-75">{account.currency}</p>
           </div>
           <div className="flex items-center gap-2">
-            <button className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+            <button className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors backdrop-blur-sm">
               <Send className="w-3.5 h-3.5" />
             </button>
-            <button className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+            <button className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors backdrop-blur-sm">
               <CreditCard className="w-3.5 h-3.5" />
             </button>
-            <button className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors ml-auto">
+            <button className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors ml-auto backdrop-blur-sm">
               <MoreHorizontal className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -242,7 +257,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
     );
   }
 
-  // List View - Fixed Icon Shapes & Visibility Colors
+  // List View
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -258,7 +273,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
       }}
       className="relative w-full"
     >
-      <div className="relative bg-white h-[120px] overflow-hidden w-full rounded-r-full shadow-sm border border-gray-100/50">
+      <div className="relative bg-white/70 backdrop-blur-xl h-[120px] overflow-hidden w-full rounded-r-full shadow-sm border border-white/50">
         {/* Left colored accent bar */}
         <div
           className={`absolute left-0 top-0 bottom-0 w-1.5 ${colors.gradient} rounded-l-2xl z-20`}
@@ -266,15 +281,14 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
 
         {/* Content Section */}
         <div className="absolute left-6 top-1/2 -translate-y-1/2 flex items-center gap-5 z-20 max-w-[65%] lg:max-w-[55%]">
-          {/* Main Icon (Left side) */}
+          {/* Main Icon */}
           <motion.div
             whileHover={{ scale: 1.05, rotate: 3 }}
             className="relative shrink-0"
           >
             <div
-              className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl ${colors.gradient} flex items-center justify-center text-white shadow-md relative overflow-hidden`}
+              className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl ${colors.gradient} flex items-center justify-center text-white shadow-md relative overflow-hidden border border-white/30`}
             >
-              {/* Subtle inner shine for main icon */}
               <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-50" />
               <IconComponent
                 className="w-7 h-7 md:w-8 md:h-8 relative z-10"
@@ -284,7 +298,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
           </motion.div>
 
           {/* Divider */}
-          <div className="w-px h-16 bg-gray-100/80 shrink-0 hidden md:block" />
+          <div className="w-px h-16 bg-gray-200/60 shrink-0 hidden md:block" />
 
           {/* Text Info */}
           <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-6">
@@ -292,13 +306,13 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
               <p className="text-[11px] md:text-xs font-bold text-gray-800 uppercase tracking-wide">
                 {account.type}
               </p>
-              <p className="text-[10px] text-gray-400 font-medium font-mono tracking-tight">
+              <p className="text-[10px] text-gray-500 font-medium font-mono tracking-tight">
                 {account.accountNumber}
               </p>
             </div>
 
-            <div className="flex flex-col md:border-l md:border-gray-100 md:pl-6 font-medium">
-              <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider hidden md:block mb-0.5">
+            <div className="flex flex-col md:border-l md:border-gray-200/60 md:pl-6 font-medium">
+              <p className="text-[9px] font-bold text-gray-500 uppercase tracking-wider hidden md:block mb-0.5">
                 Available
               </p>
               <h3 className="text-xl md:text-2xl font-extrabold text-gray-900 tracking-tight flex items-baseline">
@@ -312,32 +326,29 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
           </div>
         </div>
 
-        {/* ACTION BUTTONS - Fixed Shapes & Colors for Visibility */}
+        {/* ACTION BUTTONS */}
         <div className="absolute top-1/2 -translate-y-1/2 right-10 lg:right-12 z-30 flex flex-col gap-1.5">
-          {/* View Button */}
           <motion.button
             onClick={handleViewAccount}
             whileHover={{ scale: 1.05, x: -1 }}
             whileTap={{ scale: 0.95 }}
-            className={`flex items-center justify-center p-1.5 w-7 h-7 md:w-8 md:h-8 rounded-lg shadow-sm transition-all duration-200 backdrop-blur-sm ${colors.actionBg} ${colors.actionHover}`}
+            className={`flex items-center justify-center p-1.5 w-7 h-7 md:w-8 md:h-8 rounded-lg shadow-sm transition-all duration-200 ${colors.actionBg} ${colors.actionHover} border border-white/40`}
           >
             <Eye className={`w-4 h-4 ${colors.actionIcon}`} strokeWidth={2} />
           </motion.button>
 
-          {/* Send Button */}
           <motion.button
             whileHover={{ scale: 1.05, x: -1 }}
             whileTap={{ scale: 0.95 }}
-            className={`flex items-center justify-center p-1.5 w-7 h-7 md:w-8 md:h-8 rounded-lg shadow-sm transition-all duration-200 backdrop-blur-sm ${colors.actionBg} ${colors.actionHover}`}
+            className={`flex items-center justify-center p-1.5 w-7 h-7 md:w-8 md:h-8 rounded-lg shadow-sm transition-all duration-200 ${colors.actionBg} ${colors.actionHover} border border-white/40`}
           >
             <Send className={`w-4 h-4 ${colors.actionIcon}`} strokeWidth={2} />
           </motion.button>
 
-          {/* More Button */}
           <motion.button
             whileHover={{ scale: 1.05, x: -1 }}
             whileTap={{ scale: 0.95 }}
-            className={`flex items-center justify-center p-1.5 w-7 h-7 md:w-8 md:h-8 rounded-lg shadow-sm transition-all duration-200 backdrop-blur-sm ${colors.actionBg} ${colors.actionHover}`}
+            className={`flex items-center justify-center p-1.5 w-7 h-7 md:w-8 md:h-8 rounded-lg shadow-sm transition-all duration-200 ${colors.actionBg} ${colors.actionHover} border border-white/40`}
           >
             <MoreHorizontal
               className={`w-4 h-4 ${colors.actionIcon}`}
@@ -345,26 +356,6 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
             />
           </motion.button>
         </div>
-
-        {/* DESKTOP: Right Side Full Curve Background */}
-        <div className="block absolute top-0 bottom-0 right-0 w-24 lg:w-32 overflow-hidden z-10 pointer-events-none">
-          {/* Wide smooth curve */}
-          <div
-            className={`absolute top-0 bottom-0 right-[-40px] w-64 rounded-l-[100px] ${colors.gradient} shadow-[-5px_0_25px_rgba(0,0,0,0.1)]`}
-          >
-            <div className="absolute inset-0 rounded-l-[100px] bg-gradient-to-b from-white/40 via-transparent to-black/10" />
-            {/* Crisp edge line */}
-            <div className="absolute left-0 top-0 bottom-0 w-[0.5px] bg-white/50 mix-blend-overlay" />
-          </div>
-        </div>
-
-        {/* MOBILE: Very subtle accent border on the right */}
-        <div
-          className={`lg:hidden absolute top-0 right-0 bottom-0 w-0.5 bg-gradient-to-b ${colors.circleBg} opacity-20`}
-        />
-
-        {/* Bottom Border */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gray-50" />
       </div>
     </motion.div>
   );

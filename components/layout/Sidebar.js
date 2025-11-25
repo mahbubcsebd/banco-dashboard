@@ -1,5 +1,6 @@
 'use client';
 
+import FinxactLogo from '@/assets/icons/finxact.svg';
 import Logo from '@/assets/icons/logo.svg';
 import { sidebarMenuItems } from '@/data/mockData';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -270,9 +271,7 @@ export default function Sidebar({
                     className="w-full h-full rounded-full overflow-hidden"
                   />
                 </div>
-                <span className="font-semibold text-sm text-orange-500">
-                  Finxact
-                </span>
+                <Image src={FinxactLogo} alt="finxact logo" />
               </Link>
 
               <button
@@ -336,9 +335,7 @@ export default function Sidebar({
                   className="w-full h-full rounded-full overflow-hidden"
                 />
               </div>
-              <span className="font-semibold text-sm text-orange-500">
-                Finxact
-              </span>
+              <Image src={FinxactLogo} alt="finxact logo" />
             </Link>
           ) : (
             <Link
