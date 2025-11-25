@@ -70,101 +70,99 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
 
   // Grid View (No changes here as requested)
   if (viewMode === 'grid') {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: index * 0.1, duration: 0.3 }}
-        whileHover={{ y: -4 }}
-        className={`${colors.linear} rounded-2xl p-5 md:p-6 text-white relative overflow-hidden shadow-lg`}
-      >
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-32 h-32 bg-white rounded-full translate-y-1/2 -translate-x-1/2" />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.3 }}
+      whileHover={{ y: -4 }}
+      className={`${colors.linear} rounded-2xl p-5 md:p-6 text-white relative overflow-hidden shadow-lg`}
+    >
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-white rounded-full translate-y-1/2 -translate-x-1/2" />
+      </div>
+
+      <div className="relative z-10">
+        <div className="flex items-start justify-between mb-4">
+          <div>
+            <p className="text-xs md:text-sm font-semibold uppercase tracking-wider opacity-90 mb-1">
+              {account.type}
+            </p>
+            <p className="text-[11px] opacity-80">{account.accountNumber}</p>
+          </div>
+
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="flex flex-col items-center gap-0.5"
+          >
+            <button
+              onClick={handleViewAccount}
+              className={`p-1.5 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
+            >
+              <Eye className="w-3.5 h-3.5" />
+            </button>
+            <span className="text-[9px] font-medium opacity-90">Action</span>
+          </motion.div>
         </div>
 
-        <div className="relative z-10">
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <p className="text-xs md:text-sm font-semibold uppercase tracking-wider opacity-90 mb-1">
-                {account.type}
-              </p>
-              <p className="text-[11px] opacity-80">{account.accountNumber}</p>
-            </div>
-
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="flex flex-col items-center gap-0.5"
-            >
-              <button
-                onClick={handleViewAccount}
-                className={`p-1.5 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
-              >
-                <Eye className="w-3.5 h-3.5" />
-              </button>
-              <span className="text-[9px] font-medium opacity-90">Action</span>
-            </motion.div>
-          </div>
-
-          <div className="mb-4">
-            <motion.h3
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              className="text-2xl md:text-3xl font-bold mb-0.5"
-            >
-              $
-              {account.balance.toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </motion.h3>
-            <p className="text-[10px] opacity-75">{account.currency}</p>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex flex-col items-center gap-0.5"
-            >
-              <button
-                className={`p-2 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
-              >
-                <Send className="w-3.5 h-3.5" />
-              </button>
-              <span className="text-[9px] font-medium opacity-90">Send</span>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex flex-col items-center gap-0.5"
-            >
-              <button
-                className={`p-2 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
-              >
-                <CreditCard className="w-3.5 h-3.5" />
-              </button>
-              <span className="text-[9px] font-medium opacity-90">Card</span>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex flex-col items-center gap-0.5 ml-auto"
-            >
-              <button
-                className={`p-2 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
-              >
-                <MoreHorizontal className="w-3.5 h-3.5" />
-              </button>
-              <span className="text-[9px] font-medium opacity-90">More</span>
-            </motion.div>
-          </div>
+        <div className="mb-4">
+          <motion.h3
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            className="text-2xl md:text-3xl font-bold mb-0.5"
+          >
+            $
+            {account.balance.toLocaleString('en-US', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </motion.h3>
+          <p className="text-[10px] opacity-75">{account.currency}</p>
         </div>
-      </motion.div>
-    );
+
+        <div className="flex items-center gap-2">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex flex-col items-center gap-0.5"
+          >
+            <button
+              className={`p-2 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
+            >
+              <Send className="w-3.5 h-3.5" />
+            </button>
+            <span className="text-[9px] font-medium opacity-90">Send</span>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex flex-col items-center gap-0.5"
+          >
+            <button
+              className={`p-2 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
+            >
+              <CreditCard className="w-3.5 h-3.5" />
+            </button>
+            <span className="text-[9px] font-medium opacity-90">Card</span>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex flex-col items-center gap-0.5 ml-auto"
+          >
+            <button
+              className={`p-2 rounded-full ${colors.iconBg} ${colors.iconHover} transition-colors`}
+            >
+              <MoreHorizontal className="w-3.5 h-3.5" />
+            </button>
+            <span className="text-[9px] font-medium opacity-90">More</span>
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>;
   }
 
   // List View - REDESIGNED with 3D Curve Border
