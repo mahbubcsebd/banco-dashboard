@@ -296,7 +296,7 @@ const TechnicalRequirement = () => {
                   className="text-orange-500 hover:text-orange-600 font-medium"
                 >
                   info@finxact.com
-                </Li>
+                </Link>
               </li>
               <li>
                 You have the right to request the reason(s) why your personal
