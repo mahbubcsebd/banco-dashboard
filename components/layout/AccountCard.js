@@ -68,7 +68,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
     router.push(`/accounts/${account.accountNumber}`);
   };
 
-  // Grid View
+  // Grid View (No changes here as requested)
   if (viewMode === 'grid') {
     return (
       <motion.div
@@ -167,7 +167,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
     );
   }
 
-  // List View - Improved Design with Icon & Divider
+  // List View - REDESIGNED with 3D Curve Border
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -179,21 +179,20 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
       }}
       whileHover={{
         scale: 1.002,
-        // boxShadow: '0 12px 40px rgba(0,0,0,0.12)',
         transition: { duration: 0.3, ease: 'easeOut' },
       }}
-      className="relative w-full lg:w-[calc(100%-100px)]"
+      // CHANGED: Removed calc width, now full width
+      className="relative w-full"
     >
-      <div className="relative bg-white h-[120px] overflow-visible w-full lg:w-[calc(100%-100px)]">
+      {/* CHANGED: Removed calc width, now full width. Added rounded-r-2xl for proper corner smoothing */}
+      <div className="relative bg-white h-[120px] overflow-hidden w-full rounded-r-2xl shadow-xs border border-gray-100/50">
         {/* Left colored accent bar */}
         <div
           className={`absolute left-0 top-0 bottom-0 w-1 ${colors.linear} rounded-l-2xl`}
         />
-        <div className="absolute left-full top-0 h-1/2 bg-white w-[70px] rounded-tr-full z-20 hidden lg:block" />
-        <div className="absolute left-full bottom-0 h-1/2 bg-white w-[70px] rounded-br-full z-80 hidden lg:block" />
 
         {/* Content Section with Icon & Divider */}
-        <div className="absolute left-6 top-1/2 -translate-y-1/2 flex items-center gap-5 z-50 max-w-[55%]">
+        <div className="absolute left-6 top-1/2 -translate-y-1/2 flex items-center gap-5 z-20 max-w-[55%]">
           {/* Icon Container */}
           <motion.div
             whileHover={{
@@ -204,7 +203,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
             className="relative shrink-0"
           >
             <div
-              className={`w-16 h-16 md:w-20 md:h-20 rounded-xl ${colors.linear} flex items-center justify-center text-white relative overflow-hidden`}
+              className={`w-16 h-16 md:w-20 md:h-20 rounded-xl ${colors.linear} flex items-center justify-center text-white relative overflow-hidden shadow-md`}
             >
               <div className="absolute inset-0 bg-white opacity-10" />
               <IconComponent
@@ -216,6 +215,8 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
 
           {/* Divider Line */}
           <div className="w-px h-24 bg-linear-to-b from-transparent via-gray-300 to-transparent shrink-0" />
+
+          {/* Text Content */}
           <div className="flex items-center gap-4">
             <div className="flex flex-col items-center gap-1">
               <p className="text-xs font-bold text-gray-800 uppercase tracking-wide">
@@ -255,78 +256,57 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
               </p>
             </motion.div>
           </div>
-          {/* Text Content */}
         </div>
 
-        {/* Action Buttons - Positioned on Circle Area */}
+        {/* Action Buttons - Repositioned slightly left */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: index * 0.05 + 0.3, duration: 0.4 }}
-          className="absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 flex flex-col gap-1.5 z-50"
+          // CHANGED: Adjusted right position from lg:right-8 to lg:right-10
+          className="absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 flex flex-col gap-1.5 z-30"
         >
           <motion.button
             onClick={handleViewAccount}
-            whileHover={{
-              scale: 1.08,
-              y: -2,
-              transition: { duration: 0.2, ease: 'easeOut' },
-            }}
+            whileHover={{ scale: 1.08, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className={`p-2 rounded-sm flex items-center justify-center w-7 h-7 ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-md hover:shadow-lg backdrop-blur-sm`}
+            className={`p-2 rounded-sm flex items-center justify-center w-7 h-7 ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-sm hover:shadow-md backdrop-blur-sm`}
           >
             <Eye className="w-4 h-4 text-gray-700" strokeWidth={2} />
           </motion.button>
 
           <motion.button
-            whileHover={{
-              scale: 1.08,
-              y: -2,
-              transition: { duration: 0.2, ease: 'easeOut' },
-            }}
+            whileHover={{ scale: 1.08, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className={`p-1 rounded-sm flex items-center justify-center w-7 h-7 ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-md hover:shadow-lg backdrop-blur-sm`}
+            className={`p-1 rounded-sm flex items-center justify-center w-7 h-7 ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-sm hover:shadow-md backdrop-blur-sm`}
           >
             <Send className="w-4 h-4 text-gray-700" strokeWidth={2} />
           </motion.button>
 
           <motion.button
-            whileHover={{
-              scale: 1.08,
-              y: -2,
-              transition: { duration: 0.2, ease: 'easeOut' },
-            }}
+            whileHover={{ scale: 1.08, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className={`p-1 rounded-sm flex items-center justify-center w-7 h-7 ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-md hover:shadow-lg backdrop-blur-sm`}
+            className={`p-1 rounded-sm flex items-center justify-center w-7 h-7 ${colors.iconBg} ${colors.iconHover} transition-all duration-200 shadow-sm hover:shadow-md backdrop-blur-sm`}
           >
             <MoreHorizontal className="w-4 h-4 text-gray-700" strokeWidth={2} />
           </motion.button>
         </motion.div>
 
-        {/* Right side circular design */}
-        <div className="absolute left-full top-0 h-1/2 bg-white w-[100px] rounded-tr-full z-20 hidden lg:block" />
-        <div className="absolute left-full bottom-0 h-1/2 bg-white w-[100px] rounded-br-full z-20 hidden lg:block" />
-        <div className="absolute left-full top-1/2 -translate-y-1/2 w-[120px] h-[120px] z-30 hidden lg:block">
-          {/* Center circle with linear and 3D effect */}
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{
-              delay: index * 0.05 + 0.2,
-              duration: 0.5,
-              ease: 'easeOut',
-            }}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 w-[120px] h-[120px] rounded-full ${colors.linear} z-40 hidden lg:block`}
+        {/* NEW: Right side 3D curved border effect */}
+        <div className="absolute top-0 bottom-0 right-0 w-8 overflow-hidden z-10">
+          {/* The colored curve structure */}
+          <div
+            className={`absolute top-0 bottom-0 right-[-12px] w-16 rounded-l-3xl ${colors.linear} shadow-[-3px_0_10px_rgba(0,0,0,0.1)]`}
           >
-            {/* Inner highlight for 3D effect */}
-            <div className="absolute inset-0 rounded-full bg-linear-to-br from-white/30 via-transparent to-black/20" />
-            {/* Shine effect */}
-            <div className="absolute top-4 left-4 w-16 h-16 rounded-full bg-white/20 blur-xl" />
-          </motion.div>
+            {/* Inner highlight for 3D shine effect */}
+            <div className="absolute inset-0 rounded-l-3xl bg-linear-to-b from-white/40 via-transparent to-black/10" />
+            {/* A thin crisp edge line */}
+            <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-white/40 mix-blend-overlay" />
+          </div>
         </div>
 
         {/* Subtle Bottom Border */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gray-200 to-transparent opacity-50" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gray-100 to-transparent" />
       </div>
     </motion.div>
   );

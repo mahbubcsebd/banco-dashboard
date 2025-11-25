@@ -261,7 +261,7 @@ export default function UserList() {
         {!isMobile && (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             {currentUsers.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <AnimatePresence mode="popLayout">
                   {currentUsers.map((user, index) => (
                     <UserCard
