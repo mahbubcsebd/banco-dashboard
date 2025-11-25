@@ -3,15 +3,9 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { useState } from 'react';
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-
-import UserCard from './UserCard'; // Import করলাম
+import UserCard from './UserCard';
 import {
   DeactivateUserModal,
   DeleteUserModal,
@@ -96,8 +90,6 @@ const allUsers = [
 ];
 
 export default function UserGrid() {
-  const [isMobile, setIsMobile] = useState(false);
-
   // Modal states
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
@@ -108,14 +100,6 @@ export default function UserGrid() {
     confirmationNumber: '',
     message: '',
   });
-
-  // Check if mobile
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const generateConfirmationNumber = () =>
     Math.floor(100000000 + Math.random() * 900000000);
@@ -184,81 +168,24 @@ export default function UserGrid() {
           </Link>
         </div>
 
-        {/* Users Grid - Desktop & Tablet */}
-        {!isMobile && (
-          <div className="grid grid-cols-1 xl:grid-cols-1 gap-4">
-            <AnimatePresence mode="popLayout">
-              {allUsers.map((user, index) => (
-                <UserCard
-                  key={user.id}
-                  user={user}
-                  index={index}
-                  onDelete={handleDeleteClick}
-                  onResetPassword={handleResetPasswordClick}
-                  onDeactivate={handleDeactivateClick}
-                />
-              ))}
-            </AnimatePresence>
-          </div>
-        )}
-
-        {/* Mobile Swiper - Smooth Slider */}
-        {isMobile && allUsers.length > 0 && (
-          <div className="mobile-swiper-container">
-            <Swiper
-              modules={[Pagination]}
-              spaceBetween={16}
-              slidesPerView={1}
-              pagination={{
-                clickable: true,
-                bulletClass: 'swiper-pagination-bullet',
-                bulletActiveClass: 'swiper-pagination-bullet-active',
-              }}
-            >
-              {allUsers.map((user, index) => (
-                <SwiperSlide key={user.id}>
-                  <UserCard
-                    user={user}
-                    index={index}
-                    onDelete={handleDeleteClick}
-                    onResetPassword={handleResetPasswordClick}
-                    onDeactivate={handleDeactivateClick}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-
-            {/* Custom Swiper Pagination Styles */}
-            <style jsx global>{`
-              .mobile-swiper-container .swiper {
-                padding-bottom: 0;
-              }
-
-              .mobile-swiper-container .swiper-pagination {
-                position: relative !important;
-                bottom: auto !important;
-                margin-top: 20px;
-              }
-
-              .mobile-swiper-container .swiper-pagination-bullet {
-                width: 8px;
-                height: 8px;
-                background: #d1d5db;
-                opacity: 1;
-                transition: all 0.3s ease;
-              }
-
-              .mobile-swiper-container .swiper-pagination-bullet-active {
-                width: 32px;
-                border-radius: 4px;
-                background: #f97316;
-              }
-            `}</style>
-          </div>
-        )}
+        {/* Users List - All Devices */}
+        <div className="grid grid-cols-1 xl:grid-cols-1 gap-4">
+          <AnimatePresence mode="popLayout">
+            {allUsers.map((user, index) => (
+              <UserCard
+                key={user.id}
+                user={user}
+                index={index}
+                onDelete={handleDeleteClick}
+                onResetPassword={handleResetPasswordClick}
+                onDeactivate={handleDeactivateClick}
+              />
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
 
-      {/* Modals - Updated with isOpen prop pattern */}
+      {/* Modals */}
       <DeleteUserModal
         isOpen={showDeleteModal && !!selectedUser}
         user={selectedUser || {}}

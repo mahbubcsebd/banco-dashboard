@@ -3,10 +3,6 @@
 import { AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Search, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination as SwiperPagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 import UserCard from '@/components/dashboard/UserCard';
 import {
@@ -87,7 +83,6 @@ const ITEMS_PER_PAGE = 12;
 export default function UserList() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRole, setSelectedRole] = useState('all');
-  const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -99,13 +94,6 @@ export default function UserList() {
     confirmationNumber: '',
     message: '',
   });
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const filteredUsers = allUsers.filter((user) => {
     const matchesSearch =
@@ -239,7 +227,7 @@ export default function UserList() {
               <button
                 key={role}
                 onClick={() => setSelectedRole(role)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium ${
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                   selectedRole === role
                     ? 'bg-orange-500 text-white shadow-sm'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -258,92 +246,44 @@ export default function UserList() {
           </div>
         </div>
 
-        {!isMobile && (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            {currentUsers.length > 0 ? (
-              <div className="grid grid-cols-1 gap-4">
-                <AnimatePresence mode="popLayout">
-                  {currentUsers.map((user, index) => (
-                    <UserCard
-                      key={user.id}
-                      user={user}
-                      index={index}
-                      onDelete={handleDeleteClick}
-                      onResetPassword={handleResetPasswordClick}
-                      onDeactivate={handleDeactivateClick}
-                    />
-                  ))}
-                </AnimatePresence>
-              </div>
-            ) : (
-              <div className="text-center py-16">
-                <Search className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  No users found
-                </h3>
-                <p className="text-gray-600">
-                  Try adjusting your search or filter criteria
-                </p>
-              </div>
-            )}
-          </div>
-        )}
-
-        {isMobile && currentUsers.length > 0 && (
-          <div className="mobile-swiper-container bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <Swiper
-              modules={[SwiperPagination]}
-              spaceBetween={16}
-              slidesPerView={1}
-              pagination={{
-                clickable: true,
-                bulletClass: 'swiper-pagination-bullet',
-                bulletActiveClass: 'swiper-pagination-bullet-active',
-              }}
-            >
-              {currentUsers.map((user, index) => (
-                <SwiperSlide key={user.id}>
+        {/* User List - Same for all devices */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 md:p-6">
+          {currentUsers.length > 0 ? (
+            <div className="grid grid-cols-1 gap-4">
+              <AnimatePresence mode="popLayout">
+                {currentUsers.map((user, index) => (
                   <UserCard
+                    key={user.id}
                     user={user}
                     index={index}
                     onDelete={handleDeleteClick}
                     onResetPassword={handleResetPasswordClick}
                     onDeactivate={handleDeactivateClick}
                   />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                ))}
+              </AnimatePresence>
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <Search className="w-16 h-16 mx-auto text-gray-300 mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                No users found
+              </h3>
+              <p className="text-gray-600">
+                Try adjusting your search or filter criteria
+              </p>
+            </div>
+          )}
+        </div>
 
-            <style jsx global>{`
-              .mobile-swiper-container .swiper {
-                padding-bottom: 0;
-              }
-              .mobile-swiper-container .swiper-pagination {
-                position: relative !important;
-                bottom: auto !important;
-                margin-top: 20px;
-              }
-              .mobile-swiper-container .swiper-pagination-bullet {
-                width: 8px;
-                height: 8px;
-                background: #d1d5db;
-              }
-              .mobile-swiper-container .swiper-pagination-bullet-active {
-                width: 32px;
-                border-radius: 4px;
-                background: #f97316;
-              }
-            `}</style>
-          </div>
-        )}
-
+        {/* Pagination */}
         {filteredUsers.length > ITEMS_PER_PAGE && (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   currentPage === 1
                     ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                     : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
@@ -361,7 +301,7 @@ export default function UserList() {
                       typeof page === 'number' && handlePageChange(page)
                     }
                     disabled={page === '...'}
-                    className={`min-w-10 h-10 rounded-lg text-sm font-medium ${
+                    className={`min-w-10 h-10 rounded-lg text-sm font-medium transition-all ${
                       page === currentPage
                         ? 'bg-orange-600 text-white shadow-md'
                         : page === '...'
@@ -377,7 +317,7 @@ export default function UserList() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   currentPage === totalPages
                     ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                     : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
