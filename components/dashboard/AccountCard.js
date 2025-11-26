@@ -302,7 +302,7 @@ export default function AccountCard({ account, index, viewMode = 'grid' }) {
 
           {/* Text Info */}
           <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-6">
-            <div className="flex flex-col gap-0.5">
+            <div className="flex flex-col gap-0.5 min-w-[106px]">
               <p className="text-[11px] md:text-xs font-bold text-gray-800 uppercase tracking-wide">
                 {account.type}
               </p>

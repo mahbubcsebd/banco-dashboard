@@ -221,33 +221,39 @@ export default function RecentTransactions() {
       </div>
 
       {/* Mobile filter */}
-      <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1 lg:hidden">
-        {/* Search */}
-        <div className="relative shrink-0">
-          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-4 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-40 pl-8 pr-3 py-2 text-xs border border-gray-200 rounded-md focus:outline-none focus:border-orange-500 transition-all duration-200"
-          />
+      <div className="flex flex-col gap-2 lg:hidden">
+        {/* Search Row (Always Single Line) */}
+        <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1">
+          <div className="relative shrink-0 w-full">
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-8 pr-3 py-2 text-xs border border-gray-200 rounded-md focus:outline-none focus:border-orange-500 transition-all duration-200"
+            />
+          </div>
         </div>
 
-        {/* Filter Chips */}
-        {filterCategories.map((filter) => (
-          <button
-            key={filter.id}
-            onClick={() => setActiveFilter(filter.id)}
-            className={`px-3 py-2 rounded-md text-xs font-normal whitespace-nowrap transition-all duration-200 shrink-0 ${
-              activeFilter === filter.id
-                ? 'bg-linear-to-r from-orange-500 to-orange-600 text-white shadow-md shadow-orange-200'
-                : 'bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200'
-            }`}
-          >
-            {filter.label}
-          </button>
-        ))}
+        {/* Filter Chips in 2-Column Wrapping Layout */}
+        <div className="grid grid-cols-2 gap-2 ">
+          {filterCategories.map((filter) => (
+            <button
+              key={filter.id}
+              onClick={() => setActiveFilter(filter.id)}
+              className={`px-3 py-2 rounded-md text-xs font-normal transition-all duration-200 text-center
+          ${
+            activeFilter === filter.id
+              ? 'bg-linear-to-r from-orange-500 to-orange-600 text-white shadow-md shadow-orange-200'
+              : 'bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200'
+          }
+        `}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Mobile Card View */}
