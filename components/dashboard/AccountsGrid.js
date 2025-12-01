@@ -2,15 +2,16 @@
 
 import { accounts } from '@/data/mockData';
 import { animate, motion, useMotionValue, useTransform } from 'framer-motion';
-import { ChevronRight, Grid3x3, List } from 'lucide-react';
+import { ChevronRight, Grid3x3, LayoutGrid, List } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import AccountCard from './AccountCard';
+import AccountTabView from './AccountTabView';
 
 export default function AccountsGrid() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [viewMode, setViewMode] = useState('grid'); // 'grid', 'list', or 'tabs'
   const x = useMotionValue(0);
 
   const handleDragEnd = (event, info) => {
@@ -50,7 +51,7 @@ export default function AccountsGrid() {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* View Toggle Buttons - Now visible on all screen sizes */}
+          {/* View Toggle Buttons */}
           <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
             <motion.button
               whileTap={{ scale: 0.95 }}
@@ -74,6 +75,17 @@ export default function AccountsGrid() {
             >
               <List className="w-4 h-4" />
             </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setViewMode('tabs')}
+              className={`p-2 rounded-md transition-all duration-200 ${
+                viewMode === 'tabs'
+                  ? 'bg-white text-orange-600 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <LayoutGrid className="w-4 h-4" />
+            </motion.button>
           </div>
 
           <Link href="/my-accounts">
@@ -88,6 +100,9 @@ export default function AccountsGrid() {
           </Link>
         </div>
       </div>
+
+      {/* Tab View */}
+      {viewMode === 'tabs' && <AccountTabView accounts={accounts} />}
 
       {/* Grid View - Desktop */}
       {viewMode === 'grid' && (
@@ -121,7 +136,7 @@ export default function AccountsGrid() {
         </div>
       )}
 
-      {/* Mobile View - Grid or List based on toggle */}
+      {/* Mobile View - Grid */}
       {viewMode === 'grid' && (
         <div className="sm:hidden">
           <div className="relative h-[210px] perspective-1000">
@@ -223,7 +238,7 @@ export default function AccountsGrid() {
                 whileHover={{ scale: 1.1 }}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   index === currentIndex
-                    ? 'w-6 bg-linear-to-r from-orange-500 to-orange-600 shadow-sm'
+                    ? 'w-6 bg-gradient-to-r from-orange-500 to-orange-600 shadow-sm'
                     : 'w-1.5 bg-gray-300 hover:bg-gray-400'
                 }`}
               />

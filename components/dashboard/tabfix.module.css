@@ -1,0 +1,29 @@
+:local(.tab) {
+  margin-left: -8px;
+  z-index: 10;
+}
+
+:local(.tab:nth-child(3n + 1)) {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  /* md */
+  :local(.tab:nth-child(4n + 1)) {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* lg */
+  :local(.tab:nth-child(6n + 1)) {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  /* xl */
+  :local(.tab:nth-child(10n + 1)) {
+    margin-left: 0;
+  }
+}

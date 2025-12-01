@@ -15,10 +15,10 @@ const mockNotifications = {
     },
   ],
   promotions: [
-    { id: 2, title: 'Promotion Notifications', icon: Gift, messages: [] }, // No messages in screenshot
+    { id: 2, title: 'Promotion Notifications', icon: Gift, messages: [] },
   ],
   reminders: [
-    { id: 3, title: 'Reminder Notifications', icon: Clock, messages: [] }, // No messages in screenshot
+    { id: 3, title: 'Reminder Notifications', icon: Clock, messages: [] },
   ],
 };
 

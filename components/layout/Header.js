@@ -214,7 +214,10 @@ export default function Header({
                   </div>
 
                   <div className="py-2">
-                    <Link href="/profile" onClick={() => setShowProfile(false)}>
+                    <Link
+                      href="/dashboard/profile-personal"
+                      onClick={() => setShowProfile(false)}
+                    >
                       <motion.button
                         whileHover={{
                           x: 4,
