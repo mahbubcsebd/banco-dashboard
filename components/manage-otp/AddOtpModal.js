@@ -7,7 +7,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { X } from 'lucide-react';
 import Button from '../login/Button';
 
 const AddOtpModal = ({
@@ -31,12 +30,12 @@ const AddOtpModal = ({
           <DialogTitle className="text-lg font-semibold text-gray-900">
             Add OTP Mobile number
           </DialogTitle>
-          <button
+          {/* <button
             onClick={onClose}
             className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 transition-colors"
           >
             <X className="w-5 h-5" />
-          </button>
+          </button> */}
         </DialogHeader>
 
         <div className="p-4 space-y-4">
